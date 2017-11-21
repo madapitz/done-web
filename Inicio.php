@@ -119,7 +119,6 @@
           curl_close($ch);
         }
  include ("Usuario.php");
- include ("Validador.php");
  $nombre=' ';
  $clave=' ';
  //$validador = new Validador("usuarios.json");
