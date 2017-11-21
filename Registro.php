@@ -199,7 +199,6 @@
 
 <?php
   include("Usuario.php");
-  include("Validador.php");
     $usuario1 = new Usuario($nombrep,$apellido,$nombre,$pass,$pass2,$email,$nacimiento);
   if (isset($_POST["enviando"])) {
     $usuario1->transformToJson();
