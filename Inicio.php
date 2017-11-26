@@ -102,7 +102,7 @@
 
           curl_exec($ch);
 
-          if (!curl_errno($ch)) {
+          /*if (!curl_errno($ch)) {
             switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
               case 200: #OK
                 break;
@@ -112,11 +112,13 @@
                 break;
               default: echo 'Código http inesperado: ', $http_code, "\n";
             }
-          }
-          echo curl_getinfo($ch, CURLINFO_HTTP_CODE);
+          }*/
+          //echo curl_getinfo($ch, CURLINFO_HTTP_CODE);
+          $codigo = curl_getinfo($ch, CURLINFO_HTTP_CODE);
           curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
           curl_close($ch);
+          return($codigo);
+
         }
  include ("Usuario.php");
  $nombre=' ';
@@ -129,11 +131,20 @@
    //echo "<p class='validado'> Puedes entrar </p>";
  //}
  //else echo "<p class='no_validado'> No puedes entrar </p>";
-  transformToJson($nombre,$clave);
+  if (transformToJson($nombre,$clave)==400){
+  ?>
+   <div class="container">
+   <div class="col-md-4">
+   <div class="alert alert-info alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    <strong>Contraseña o Usuario Incorrecto, Revise e Inténtelo de Nuevo.</strong> 
+   </div>
+   </div>
+   </div>
+  <?php  
+  }
  }
 ?>
-
-
 <footer>
 </footer>
 
