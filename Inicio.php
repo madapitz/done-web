@@ -62,16 +62,19 @@
     </tr>
 
   <tr>
-  <td colspan="2" align="center"><input name="enviando" type="submit" class="boton" value="Entra"/> <td>
+  <td colspan="2" align="center"><input name="enviando" type="submit" class="boton" value="Entrar"/> <td>
+  </tr>
+
+  <tr>
+  <td colspan="2" align="center"><input name="olvidecontra" type="submit" class="boton" value="Olvide mi contraseña"/> <td>
   </tr>
 
 </table>
-
 </form>
-
 </section>
-
 <!---termina el formulario de inicio-->
+
+
 
 <section class="container">
 <ul>
@@ -83,6 +86,10 @@
 
 
 <?php
+include ("Usuario.php"); //incluir usuario
+
+
+
   function transformToJson($usuario, $clave){
           $data = array(
             'username' => $usuario,
@@ -92,16 +99,13 @@
           $url = 'https://intense-lake-39874.herokuapp.com/usuarios/login';
           //Iniciar cURL
           $ch = curl_init($url);
-
           //Decir a curl que se quiere mandar un POST
           curl_setopt($ch, CURLOPT_POST, 1);
           //Adjuntar el json string al POST
           curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
           //Configurar el content type a application/json
           curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-
           curl_exec($ch);
-
           if (!curl_errno($ch)) {
             switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
               case 200: #OK
@@ -115,22 +119,29 @@
           }
           echo curl_getinfo($ch, CURLINFO_HTTP_CODE);
           curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
           curl_close($ch);
         }
- include ("Usuario.php");
- $nombre=' ';
- $clave=' ';
- //$validador = new Validador("usuarios.json");
- if (isset($_POST["enviando"])) {
+
+
+ $nombre='';
+ $clave='';
+ $url = '';
+
+ if (isset($_POST["enviando"])) { // si presionas enviar, te lleva al inicio de sesion
   $nombre=$_POST["nombre_usuario"];
   $clave=$_POST["contrasena_usuario"];
- //if ($validador->validarinicio($nombre)){
-   //echo "<p class='validado'> Puedes entrar </p>";
- //}
- //else echo "<p class='no_validado'> No puedes entrar </p>";
   transformToJson($nombre,$clave);
  }
+
+
+ else if (isset($_POST["olvidecontra"])){ // si presionas olvide mi contrasena, te lleva a recuperar contraseña
+  $url ="recuperarcontrasena.php";
+  header("Location: $url");
+ }
+
+
+
+
 ?>
 
 
