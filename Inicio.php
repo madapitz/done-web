@@ -29,7 +29,7 @@
   .ubicacion{
     position: relative;
     left:18%;
-    top:-320px;
+    top:-335px;
   }
 </style>
 <body>
@@ -55,12 +55,12 @@
     <tr>
       <td id ="identificadorentrada">Nombre de Usuario</td>
       <td><label for="nombre_usuario"></label>
-      <input type="text" name="nombre_usuario" id="nombre_usuario"  placeholder="Usuario" autocomplete="off"></td>
+      <input type="text" name="nombre_usuario" id="nombre_usuario"  placeholder="Usuario" autocomplete="off" required></td>
     </tr>
     <tr>
       <td id ="identificadorentrada">Contraseña</td>
       <td><label for="contrasena_usuario"></label>
-      <input type="password" name="contrasena_usuario" id="constrasena_usuario"  placeholder="Constraseña" autocomplete="off"></td>
+      <input type="password" name="contrasena_usuario" id="constrasena_usuario"  placeholder="Constraseña" autocomplete="off" required></td>
     </tr>
 
     <tr>
@@ -140,14 +140,28 @@
  //}
  //else echo "<p class='no_validado'> No puedes entrar </p>";
   $codigo=TransformToJson($nombre,$clave);
-  if ($codigo==400){
+  if ($codigo==404){
   ?>
    <div class="ubicacion">
    <div class="container">
    <div class="col-md-6">
    <div class="alert alert-info alert-dismissable">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-    <strong>Contraseña o Usuario Incorrecto</strong> , Revise e Inténtelo de Nuevo. 
+    <strong>Usuario No Existe</strong> , Revise e Inténtelo de Nuevo. 
+   </div>
+   </div>
+   </div>
+   </div>
+  <?php
+  }
+  if ($codigo==401){
+  ?>
+   <div class="ubicacion">
+   <div class="container">
+   <div class="col-md-6">
+   <div class="alert alert-info alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    <strong>Contraseña Incorrecta</strong> , Revise e Inténtelo de Nuevo. 
    </div>
    </div>
    </div>
