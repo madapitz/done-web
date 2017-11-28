@@ -1,3 +1,4 @@
+
 <?php
 class Usuario{
 //atributos
@@ -47,7 +48,6 @@ function ImprimirDatosUsuario(){
         function getnacimiento(){
           return $this->nacimiento;
         }
-
         function transformToJson(){
           $data = array(
             'email' => $this->email,
@@ -62,32 +62,22 @@ function ImprimirDatosUsuario(){
           $url = 'https://intense-lake-39874.herokuapp.com/usuarios';
           //Iniciar cURL
           $ch = curl_init($url);
-
           //Decir a curl que se quiere mandar un POST
           curl_setopt($ch, CURLOPT_POST, 1);
           //Adjuntar el json string al POST
           curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
           //Configurar el content type a application/json
           curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-
           curl_exec($ch);
-
-          if (!curl_errno($ch)) {
-            switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
-              case 200: #OK
-                break;
-              case 400: echo 'Bad request';
-                break;
-              case 404: echo 'Not found';
-                break;
-              case 412: echo 'Usuario ya existe';
-                break;
-              default: echo 'Código http inesperado: ', $http_code, "\n";
-            }
-          }
+          //if (!curl_errno($ch)) {
+          $http_info = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+          //}
           curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
           curl_close($ch);
+          return $http_info;
+
         }
+
+
 }
 ?>
