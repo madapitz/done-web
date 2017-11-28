@@ -16,7 +16,8 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
 
@@ -24,7 +25,13 @@
 
 
 </head>
-
+<style type="text/css">
+  .ubicacion{
+    position: relative;
+    left:18%;
+    top:-335px;
+  }
+</style>
 <body>
   <header>
     <section class ="container">
@@ -48,12 +55,12 @@
     <tr>
       <td id ="identificadorentrada">Nombre de Usuario</td>
       <td><label for="nombre_usuario"></label>
-      <input type="text" name="nombre_usuario" id="nombre_usuario"  placeholder="Usuario" autocomplete="off"></td>
+      <input type="text" name="nombre_usuario" id="nombre_usuario"  placeholder="Usuario" autocomplete="off" required></td>
     </tr>
     <tr>
       <td id ="identificadorentrada">Contraseña</td>
       <td><label for="contrasena_usuario"></label>
-      <input type="password" name="contrasena_usuario" id="constrasena_usuario"  placeholder="Constraseña" autocomplete="off"></td>
+      <input type="password" name="contrasena_usuario" id="constrasena_usuario"  placeholder="Constraseña" autocomplete="off" required></td>
     </tr>
 
     <tr>
@@ -102,7 +109,7 @@
 
           curl_exec($ch);
 
-          if (!curl_errno($ch)) {
+          /*if (!curl_errno($ch)) {
             switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
               case 200: #OK
                 break;
@@ -112,15 +119,18 @@
                 break;
               default: echo 'Código http inesperado: ', $http_code, "\n";
             }
-          }
-          echo curl_getinfo($ch, CURLINFO_HTTP_CODE);
-          curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
+          }*/
+          //echo curl_getinfo($ch, CURLINFO_HTTP_CODE);
+          $codigo = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+          //curl_getinfo($ch, CURLINFO_HTTP_CODE);
           curl_close($ch);
+          return($codigo);
+
         }
  include ("Usuario.php");
  $nombre=' ';
  $clave=' ';
+ $direccion=' ';
  //$validador = new Validador("usuarios.json");
  if (isset($_POST["enviando"])) {
   $nombre=$_POST["nombre_usuario"];
@@ -129,11 +139,41 @@
    //echo "<p class='validado'> Puedes entrar </p>";
  //}
  //else echo "<p class='no_validado'> No puedes entrar </p>";
-  transformToJson($nombre,$clave);
+  $codigo=TransformToJson($nombre,$clave);
+  if ($codigo==404){
+  ?>
+   <div class="ubicacion">
+   <div class="container">
+   <div class="col-md-6">
+   <div class="alert alert-info alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    <strong>Usuario No Existe</strong> , Revise e Inténtelo de Nuevo. 
+   </div>
+   </div>
+   </div>
+   </div>
+  <?php
+  }
+  if ($codigo==401){
+  ?>
+   <div class="ubicacion">
+   <div class="container">
+   <div class="col-md-6">
+   <div class="alert alert-info alert-dismissable">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    <strong>Contraseña Incorrecta</strong> , Revise e Inténtelo de Nuevo. 
+   </div>
+   </div>
+   </div>
+   </div>
+  <?php
+  }
+  if ($codigo==200){
+    $direccion='bienvenido.php';
+    header("Location: $direccion");
+  }
  }
 ?>
-
-
 <footer>
 </footer>
 
