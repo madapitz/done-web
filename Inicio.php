@@ -2,7 +2,6 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
 <title>Done! - Iniciar Sesión</title>
 
 <!--fuentes de google-->
@@ -11,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet"/> <!--font-family: 'Space Mono', monospace;-->
 <link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet"/> <!--font-family: 'Megrim', cursive;-->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/> <!--font-family: 'Roboto', sans-serif;-->
+<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -21,26 +21,46 @@
 
 
 <link rel ="stylesheet" href="estilos.css"/>
-
-
 </head>
 
+
+
 <body>
+
   <header>
     <section class ="container">
      <h3 class="titulo text-center">Done!</h3>
-     <h1>Ejemplo de Inicio</h1>
+     <h1>Iniciar sesión</h1>
+     <form action="Inicio.php" method="POST" class="text-center" style="display:inline; margin:0; padding:0;">
+       <input name="homepag" type="submit" class="btn boton" id="botonav" value="Home" />
+       <input name="registrarsepag" type="submit" class="btn boton" id="botonav" value="Registrarse"/>
+       <input name="iniciopag" type="submit" class="btn btn-primary boton" id="botonav" value="Iniciar Sesión"/>
+     </form>
     </section>
   </header>
 
 
+<?php  //botones de navegacion
+  if(isset($_POST['homepag'])){
+     $url = 'index.php';
+     header("Location:$url");
+   }
+  else if(isset($_POST['registrarsepag'])){
+     $url = 'Registro.php';
+     header("Location:$url");
+   }
+  else if(isset($_POST['iniciopag'])){
+    $url = 'Inicio.php';
+    header("Location:$url");
+   }
+?>
 
 
-<!--<form method="post" name="datos_usuario" id="datos_usuario" autocomplete="off">-->
+
+
 
 <!---inicia el formulario-->
 <section class ="container">
-
   <h2>Entrar</h2>
 
   <form  action="Inicio.php" method="POST">
@@ -55,23 +75,18 @@
       <td><label for="contrasena_usuario"></label>
       <input type="password" name="contrasena_usuario" id="constrasena_usuario"  placeholder="Constraseña" autocomplete="off"></td>
     </tr>
-
     <tr>
       <td>&nbsp;</td> <!--&nbsp crea un espacio horizontal-->
       <td>&nbsp;</td>
     </tr>
-
   <tr>
   <td colspan="2" align="center"><input name="enviando" type="submit" class="boton" value="Entra"/> <td>
   </tr>
-
 </table>
-
 </form>
-
 </section>
-
 <!---termina el formulario de inicio-->
+
 
 <section class="container">
 <ul>
@@ -83,6 +98,9 @@
 
 
 <?php
+include ("Usuario.php"); //incluir usuario
+
+
   function transformToJson($usuario, $clave){
           $data = array(
             'username' => $usuario,
@@ -92,16 +110,13 @@
           $url = 'https://intense-lake-39874.herokuapp.com/usuarios/login';
           //Iniciar cURL
           $ch = curl_init($url);
-
           //Decir a curl que se quiere mandar un POST
           curl_setopt($ch, CURLOPT_POST, 1);
           //Adjuntar el json string al POST
           curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
           //Configurar el content type a application/json
           curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-
           curl_exec($ch);
-
           if (!curl_errno($ch)) {
             switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
               case 200: #OK
@@ -115,22 +130,20 @@
           }
           echo curl_getinfo($ch, CURLINFO_HTTP_CODE);
           curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
           curl_close($ch);
         }
- include ("Usuario.php");
- $nombre=' ';
- $clave=' ';
- //$validador = new Validador("usuarios.json");
- if (isset($_POST["enviando"])) {
+
+
+ $nombre='';
+ $clave='';
+ $url = '';
+
+ if (isset($_POST["enviando"])) { // si presionas enviar, te lleva al inicio de sesion
   $nombre=$_POST["nombre_usuario"];
   $clave=$_POST["contrasena_usuario"];
- //if ($validador->validarinicio($nombre)){
-   //echo "<p class='validado'> Puedes entrar </p>";
- //}
- //else echo "<p class='no_validado'> No puedes entrar </p>";
   transformToJson($nombre,$clave);
  }
+
 ?>
 
 
