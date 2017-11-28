@@ -49,7 +49,8 @@
   <footer>
     <a href="app-release.apk"><img src="google-play-badge.png" class="img-google-play"/></a>
   </footer>
-  
+
+
   <?php
    $url = '';
    if ( isset($_POST['Registro']) )
@@ -58,6 +59,7 @@
     $url = 'Inicio.php';
    header("Location: $url");
  ?>
+
 </body>
 
 </html>
