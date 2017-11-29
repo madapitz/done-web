@@ -35,7 +35,6 @@ ob_start();
     top:-335px;
   }
 </style>
-=======
 <body>
 
   <header>
@@ -97,7 +96,6 @@ ob_start();
 </section>
 <!---termina el formulario de inicio-->
 <?php
-=======
 
 if(isset($_POST['homepag'])){
    $url = 'index.php';
