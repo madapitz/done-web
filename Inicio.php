@@ -80,12 +80,20 @@
       <td>&nbsp;</td>
     </tr>
   <tr>
-  <td colspan="2" align="center"><input name="enviando" type="submit" class="boton" value="Entra"/> <td>
+  <td colspan="2" align="center"><input name="enviando" type="submit" class="boton" value="Entrar"/> <td>
   </tr>
+
+
+  <tr>
+  <td colspan="2" align="center"><input name="olvidecontra" type="submit" class="boton" value="Olvide mi contraseña"/> <td>
+  </tr>
+
+
 </table>
 </form>
 </section>
 <!---termina el formulario de inicio-->
+
 
 
 <section class="container">
@@ -99,6 +107,7 @@
 
 <?php
 include ("Usuario.php"); //incluir usuario
+
 
 
   function transformToJson($usuario, $clave){
@@ -143,6 +152,17 @@ include ("Usuario.php"); //incluir usuario
   $clave=$_POST["contrasena_usuario"];
   transformToJson($nombre,$clave);
  }
+
+
+
+ else if (isset($_POST["olvidecontra"])){ // si presionas olvide mi contrasena, te lleva a recuperar contraseña
+  $url ="recuperarcontrasena.php";
+  header("Location: $url");
+ }
+
+
+
+
 
 ?>
 

@@ -108,7 +108,7 @@ header {
 
 	#identificadorentrada {
 		font-family: 'Quicksand', sans-serif;
-		 text-align:left;
+		 text-align:center;
 		 padding-left: 10px;
 		 margin-bottom: 20px;
 		 color:white;
@@ -126,7 +126,7 @@ header {
 		margin-bottom: 10px;
 		margin-top: 10px;
 		margin-left: 10px;
-		font-size: 15px;
+		font-size: 20px;
 		border-radius: 4px;
 
 		padding-left: 7px;
