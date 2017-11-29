@@ -11,7 +11,7 @@ body{
 
 h3{
 	font-family: 'Lobster', cursive;
-	font-size: 100px;
+	font-size: 90px;
 	font-weight: normal;
 	margin-left: 5%;
 	color: #eee;
@@ -29,7 +29,8 @@ header {
 
 	 h1{
 		 position: relative;
-		 font-family: 'Quicksand', sans-serif;
+		 /*font-family: 'Quicksand', sans-serif;*/
+		 font-family: 'Lobster', cursive;
 		 text-align:center;
 		 color: white;
 		 font-size: 50px;
@@ -37,19 +38,18 @@ header {
 		 text-align: center;
 		 /*margin-bottom: 0px;
 		 margin-top: 0;
-		 border-radius: 5px;
-		 padding: 5px;*/
-		 font-weight: normal;
+		 border-radius: 5px;*/
+		 padding-left: 60px;
+		 font-weight:100;
 		 margin: auto;
 		 margin-top: 0px;
 		 margin-left: 5%;
+		 margin-right: 5%;
 	}
 
 	h1,h3 {
 		display:inline;
 	}
-
-
 
 	table{
 		padding:5px;
@@ -58,6 +58,7 @@ header {
     border-radius: 0px 0px 20px 20px;
     /*margin: 20px auto;*/
 		margin-bottom: 20px;
+
 	}
 
 
@@ -87,8 +88,10 @@ header {
 	}
 
 
+
+
   h2{
-		font-family: 'Roboto', sans-serif;
+		font-family: 'Quicksand', sans-serif;
     text-align: center;
 		color: white;
 		width: 70%;
@@ -97,7 +100,7 @@ header {
 		border-bottom: white 5px solid;
 		border-radius: 20px 20px 0px 0px;
 		margin: auto;
-		margin-top: 3%;
+		margin-top: 6%;
 		/*margin-left: 54%;*/
 		font-weight:100;
 		font-size: 30px;
@@ -105,7 +108,7 @@ header {
 
 	#identificadorentrada {
 		font-family: 'Quicksand', sans-serif;
-		 text-align:left;
+		 text-align:center;
 		 padding-left: 10px;
 		 margin-bottom: 20px;
 		 color:white;
@@ -123,7 +126,7 @@ header {
 		margin-bottom: 10px;
 		margin-top: 10px;
 		margin-left: 10px;
-		font-size: 15px;
+		font-size: 20px;
 		border-radius: 4px;
 
 		padding-left: 7px;
@@ -146,6 +149,7 @@ header {
  input{
   height: 40px;
   }
+
 
  input:focus {
  	background: linear-gradient(left, #FFFFFF, #EFEFEF);
@@ -170,6 +174,18 @@ header {
 	background-color: #9FF1FE;
   color: black;
   }
+
+	#botonav{
+		border-radius: 20px;
+	  font-size: 18px;
+	  border: none;
+		width: 120px;
+		height: 30px;
+		text-align: center;
+		margin:0;
+		padding: 0;
+		margin-bottom: 20px;
+	}
 
 ul{
 	list-style: none;
@@ -237,5 +253,3 @@ text-align: center;
 	  background-color: gray;
 		height: 20px;
 	}
-
-	

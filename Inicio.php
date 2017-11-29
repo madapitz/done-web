@@ -5,7 +5,6 @@ ob_start();
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
 <title>Done! - Iniciar Sesión</title>
 
 <!--fuentes de google-->
@@ -25,6 +24,7 @@ ob_start();
 
 
 <link rel ="stylesheet" href="estilos.css"/>
+</head>
 
 
 </head>
@@ -35,7 +35,9 @@ ob_start();
     top:-335px;
   }
 </style>
+=======
 <body>
+
   <header>
     <section class ="container">
      <h3 class="titulo text-center">Done!</h3>
@@ -51,11 +53,12 @@ ob_start();
 
 
 
-<!--<form method="post" name="datos_usuario" id="datos_usuario" autocomplete="off">-->
+
+
+
 
 <!---inicia el formulario-->
 <section class ="container">
-
   <h2>Entrar</h2>
 
   <form  action="Inicio.php" method="POST">
@@ -70,14 +73,17 @@ ob_start();
       <td><label for="contrasena_usuario"></label>
       <input type="password" name="contrasena_usuario" id="constrasena_usuario"  placeholder="Constraseña" autocomplete="off" required></td>
     </tr>
-
     <tr>
       <td>&nbsp;</td> <!--&nbsp crea un espacio horizontal-->
       <td>&nbsp;</td>
     </tr>
+  <tr>
+  <td colspan="2" align="center"><input name="enviando" type="submit" class="boton" value="Entrar"/> <td>
+  </tr>
+
 
   <tr>
-  <td colspan="2" align="center"><input name="enviando" type="submit" class="boton" value="Entra"/> <td>
+  <td colspan="2" align="center"><input name="olvidecontra" type="submit" class="boton" value="Olvide mi contraseña"/> <td>
   </tr>
 
   <tr>
@@ -86,11 +92,13 @@ ob_start();
 
 </table>
 
+</table>
 </form>
-
 </section>
 <!---termina el formulario de inicio-->
 <?php
+=======
+
 if(isset($_POST['homepag'])){
    $url = 'index.php';
    header("Location:$url");
@@ -103,6 +111,7 @@ else if(isset($_POST['iniciopag'])){
   $url = 'Inicio.php';
   header("Location:$url");
  }
+
 else if (isset($_POST["olvidecontra"])){ // si presionas olvide mi contrasena, te lleva a recuperar contraseña
  $url ="recuperarcontrasena.php";
  header("Location: $url");
@@ -115,6 +124,10 @@ else if (isset($_POST["olvidecontra"])){ // si presionas olvide mi contrasena, t
 </ul>
 </section>
 <?php
+include ("Usuario.php"); //incluir usuario
+
+
+
   function transformToJson($usuario, $clave){
           $data = array(
             'username' => $usuario,
@@ -194,6 +207,7 @@ else if (isset($_POST["olvidecontra"])){ // si presionas olvide mi contrasena, t
     header("Location: $url");
   }
  }
+
 ?>
 <footer>
 </footer>
