@@ -1,8 +1,7 @@
-<!--Formulario de prueba-->
+﻿<!--Formulario de prueba-->
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
 <title>Done!</title>
 
 <!--fuentes de google-->
@@ -11,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet"/> <!--font-family: 'Space Mono', monospace;-->
 <link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet"/> <!--font-family: 'Megrim', cursive;-->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/> <!--font-family: 'Roboto', sans-serif;-->
+<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -22,15 +22,11 @@
 <link rel ="stylesheet" href="estilos.css"/>
 
 
-
-
 <style type="text/css">
   .error{
     color: red;
   }
 </style>
-
-
 
 
 </head>
@@ -40,9 +36,13 @@
   <header>
     <section class ="container">
     <h3 class="titulo text-center">Done!</h3>
-    <h1>Ejemplo de registro</h1>
-    </section>
-  </header>
+    <h1>Registrarse</h1>
+
+    <form method="POST" class="text-center" style="display:inline; margin:0; padding:0;">
+      <input name="homepag" type="submit" class="btn boton" id="botonav" value="Home" />
+      <input name="registrarsepag" type="submit" class="btn boton" id="botonav" value="Registrarse"/>
+      <input name="iniciopag" type="submit" class="btn btn-primary boton" id="botonav" value="Iniciar Sesión"/>
+    </form>
 
 
 <!-- -inicia el formulario-->
@@ -105,9 +105,27 @@
     	$nameErr = "El nombre de usuario ya existe";
     }
   }
-
 ?>
+      
+    </section>
+  </header>
 
+
+
+<?php   //botones de navegacion
+  if(isset($_POST['homepag'])){
+     $url = 'index.php';
+     header("Location:$url");
+   }
+  else if(isset($_POST['registrarsepag'])){
+     $url = 'Registro.php';
+     header("Location:$url");
+   }
+  else if(isset($_POST['iniciopag'])){
+    $url = 'Inicio.php';
+    header("Location:$url");
+   }
+?>
 
 
 <section class ="container">
@@ -146,6 +164,7 @@
     <tr>
       <td id ="identificadorentrada">Nombre de usuario</td>
       <td><label for="nombre_usuario"></label>
+
       <input type="text" name="nombre_usuario" id="nombre_usuario" placeholder="Elija nombre de usuario" required><a href="#" data-toggle="tooltip" title="<?php echo $nameErr; ?>"> <i class="fa fa-exclamation-circle" aria-hidden="true" style="color: black"></i>
         </a></td>
     </tr>
@@ -198,15 +217,6 @@
 
 </section>
 
-
-
-
-
-
-
-<footer>
-
-</footer>
 
 </body>
 
