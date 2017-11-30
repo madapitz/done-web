@@ -80,23 +80,17 @@ ob_start();
   <td colspan="2" align="center"><input name="enviando" type="submit" class="boton" value="Entrar"/> <td>
   </tr>
 
-
   <tr>
   <td colspan="2" align="center"><input name="olvidecontra" type="submit" class="boton" value="Olvide mi contraseña"/> <td>
-  </tr>
-
-  <tr>
-  <td colspan="2" align="center"><input name="olvidecontra" type="submit" class="boton" value="Olvide mi contraseña"/> <td>
-</tr>
-
+  </tr> 
+     </form>
+  
 </table>
-
-</table>
-</form>
 </section>
-<!---termina el formulario de inicio-->
-<?php
 
+ 
+  
+<?php
 if(isset($_POST['homepag'])){
    $url = 'index.php';
    header("Location:$url");
@@ -109,23 +103,24 @@ else if(isset($_POST['iniciopag'])){
   $url = 'Inicio.php';
   header("Location:$url");
  }
-
 else if (isset($_POST["olvidecontra"])){ // si presionas olvide mi contrasena, te lleva a recuperar contraseña
  $url ="recuperarcontrasena.php";
  header("Location: $url");
 }
 ?>
+  
+  
+  
 <section class="container">
 <ul>
 <li><img id ="icono" src="cloud.svg" height="40" width="40"/><b id="descripcion_icon">Si ya tienes una cuenta inicia sesión para ver tus tareas.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
 <li><img id ="icono" src="smartphone.svg" height="40" width="40"/><b id="descripcion_icon">Disponible en dispositivos Android.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
 </ul>
 </section>
+  
+  
+  
 <?php
-include ("Usuario.php"); //incluir usuario
-
-
-
   function transformToJson($usuario, $clave){
           $data = array(
             'username' => $usuario,
@@ -159,21 +154,21 @@ include ("Usuario.php"); //incluir usuario
           curl_close($ch);
           return($codigo);
         }
+
  include ("Usuario.php");
  $nombre=' ';
  $clave=' ';
  $direccion=' ';
- //$validador = new Validador("usuarios.json");
+ 
+
  if (isset($_POST["enviando"])) {
   $nombre=$_POST["nombre_usuario"];
   $clave=$_POST["contrasena_usuario"];
- //if ($validador->validarinicio($nombre)){
-   //echo "<p class='validado'> Puedes entrar </p>";
- //}
- //else echo "<p class='no_validado'> No puedes entrar </p>";
+
   $codigo=TransformToJson($nombre,$clave);
   if ($codigo==404){
   ?>
+  
    <div class="ubicacion">
    <div class="container">
    <div class="col-md-6">
@@ -186,8 +181,10 @@ include ("Usuario.php"); //incluir usuario
    </div>
   <?php
   }
+   
   if ($codigo==401){
   ?>
+   <br>
    <div class="ubicacion">
    <div class="container">
    <div class="col-md-6">
@@ -205,15 +202,12 @@ include ("Usuario.php"); //incluir usuario
     header("Location: $url");
   }
  }
-
 ?>
+  
+  
 <footer>
 </footer>
-
 </body>
-
-
-
 
 </html>
 <?php
