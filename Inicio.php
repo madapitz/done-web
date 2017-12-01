@@ -81,7 +81,7 @@ ob_start();
   </tr>
 
   <tr>
-  <td colspan="2" align="center"><input name="olvidecontra" type="submit" class="boton" value="Olvide mi contraseña"/> <td>
+  <td colspan="2" align="center"><input name="olvidecontra" type="submit" class="boton" value="Olvide mi contraseña"  formnovalidate/> <td>
   </tr> 
      </form>
   
@@ -154,17 +154,14 @@ else if (isset($_POST["olvidecontra"])){ // si presionas olvide mi contrasena, t
           curl_close($ch);
           return($codigo);
         }
-
  include ("Usuario.php");
  $nombre=' ';
  $clave=' ';
  $direccion=' ';
  
-
  if (isset($_POST["enviando"])) {
   $nombre=$_POST["nombre_usuario"];
   $clave=$_POST["contrasena_usuario"];
-
   $codigo=TransformToJson($nombre,$clave);
   if ($codigo==404){
   ?>
@@ -203,8 +200,7 @@ else if (isset($_POST["olvidecontra"])){ // si presionas olvide mi contrasena, t
   }
  }
 ?>
-  
-  
+
 <footer>
 </footer>
 </body>
