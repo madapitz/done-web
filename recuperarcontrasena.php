@@ -16,6 +16,8 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
 
@@ -24,8 +26,22 @@
 
 
 </head>
-
+<style type="text/css">
+  .ubicacion{
+    /*position: absolute;
+    left:25%;
+    top:-335px;*/
+    padding:5px;
+		width: 20%;
+		/*margin-right: 6%;*/
+    border-radius: 0px 0px 20px 20px;
+    /*margin: 20px auto;*/
+		margin-bottom: 20px;
+  }
+</style>
 <body>
+
+
 
   <header>
     <section class ="container">
@@ -59,11 +75,13 @@
 </section>
 
 
+
 <section class="container">
 <ul>
 <li><img id ="icono" src="code.svg" height="40" width="40"/><b id="descripcion_icon">Si olvidaste tu contraseña ingresa tu email de registro.</b><p id = "descripcion_icon" style ="text-align:none;"> Con tu email de registro podremos saber cual es tu contraseña, tu nueva contraseña será enviada a tu correo.</p></li>
 </ul>
 </section>
+
 
 </body>
 
@@ -72,13 +90,12 @@
 
 <?php
 
-function enviarcontrasena($contrasena){ // manda la contrasena generada a los de rest y ellos la cambian en el usuario
 
+function enviarcontrasena($contrasena){ // manda la contrasena generada a los de rest y ellos la cambian en el usuario
   //generar arreglo
   $data = array(
     'password' => $contrasena,
   );
-
 
   $json = json_encode($data);
   $url = 'https://intense-lake-39874.herokuapp.com/usuarios/login';
@@ -114,6 +131,8 @@ else {
   curl_getinfo($ch, CURLINFO_HTTP_CODE);
   curl_close($ch);
 }
+
+
 
 
 
@@ -154,16 +173,20 @@ function randomString($tipo){
 
 
 
-if (isset($_POST['email_usuario'])){
+?>
 
 
-$correo=$_POST["email_usuario"]; //aqui se supone que se debe mandar el email al usuario con la nueva contrasena
-$contenido="\nCorreo: ".$correo."\ncontraseña: vla vbla bla";
-/*mail($correo,"Recuperar contraseña", $contenido);*/
+<?php
+
+include("Correo.php"); //incluir la clase Correo.php para mandar el mail
+if (isset($_POST['email_usuario'])){ // si introducido email
+
+$email=$_POST["email_usuario"]; //aqui se supone que se debe mandar el email al usuario con la nueva contrasena
 
 
-echo "Por ahora solo genera contraseña<br>";
-echo "Esta es la contraseña generada:" .randomString("");
+$correo = new Correo($email);
+$correo->enviarNuevaContrasena(randomString(""));
+
 
 $nuevacontra = randomString("");
 enviarcontrasena($nuevacontra);
@@ -172,6 +195,8 @@ enviarcontrasena($nuevacontra);
 
 
 ?>
+
+
 
 
 
