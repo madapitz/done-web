@@ -6,6 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 
 //Load composer's autoloader
 require 'PHPMailer/vendor/autoload.php';
+include ("Alerta.php");
 
 
 
@@ -82,30 +83,17 @@ class Correo {
                           <br> Tu nueva contrase&ntilde;a es:  <br>' .$contrasena.
                           '<br>Contacto: doneeeapp@gmail.com</br>
                           <br>No responder a este correo</br>';
- 
+
         $mail->send();
         echo 'Message has been sent';
 
 
     } catch (Exception $e) { // una excepcion (cualquier error que se pueda presentar en el php mailer, como correo no existe o falla de conexión al cliente web)
 
-  /*  ?>
-
-       <div class="ubicacion">
-       <div class="container">
-       <div class="col-md-6">
-       <div class="alert alert-info alert-dismissable">
-       <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-       <strong>Algo salió mal</strong> , el correo no pudo ser enviado
-       </div>
-       </div>
-       </div>
-       </div>
-
-    <?php*/
-
-        echo 'Message could not be sent.';
-        echo 'Mailer Error: ' . $mail->ErrorInfo;
+      $alert = new Alerta("Algo salió mal :(", ", Revise su correo y su conexión a internet");
+      $alert->mostrar();
+      /*  echo 'Message could not be sent.';
+        echo 'Mailer Error: ' . $mail->ErrorInfo;*/
     }
 
 

@@ -27,14 +27,8 @@ ob_start();
 </head>
 
 
-</head>
-<style type="text/css">
-  .ubicacion{
-    position: relative;
-    left:25%;
-    top:-335px;
-  }
-</style>
+
+
 <body>
 
   <header>
@@ -82,7 +76,7 @@ ob_start();
 
   <tr>
   <td colspan="2" align="center"><input name="olvidecontra" type="submit" class="boton" value="Olvide mi contraseña"  formnovalidate/> <td>
-  </tr> 
+  </tr>
 
      </form>
 
@@ -91,7 +85,7 @@ ob_start();
 
 
 
-<?php
+<?php /*Botones de la página de inicio*/
 if(isset($_POST['homepag'])){
    $url = 'index.php';
    header("Location:$url");
@@ -112,16 +106,16 @@ else if (isset($_POST["olvidecontra"])){ // si presionas olvide mi contrasena, t
 
 
 
-<section class="container">
-<ul>
-<li><img id ="icono" src="cloud.svg" height="40" width="40"/><b id="descripcion_icon">Si ya tienes una cuenta inicia sesión para ver tus tareas.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
-<li><img id ="icono" src="smartphone.svg" height="40" width="40"/><b id="descripcion_icon">Disponible en dispositivos Android.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
-</ul>
-</section>
+
+
 
 
 
 <?php
+include ("Usuario.php");
+include ("Alerta.php");
+
+
 
   function transformToJson($usuario, $clave){
           $data = array(
@@ -157,51 +151,51 @@ else if (isset($_POST["olvidecontra"])){ // si presionas olvide mi contrasena, t
           return($codigo);
         }
 
- include ("Usuario.php");
+
  $nombre=' ';
  $clave=' ';
  $direccion=' ';
 
-  
+
+
  if (isset($_POST["enviando"])) {
+
   $nombre=$_POST["nombre_usuario"];
   $clave=$_POST["contrasena_usuario"];
   $codigo=TransformToJson($nombre,$clave);
-  if ($codigo==404){
-  ?>
-   <div class="ubicacion">
-   <div class="container">
-   <div class="col-md-6">
-   <div class="alert alert-info alert-dismissable">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-    <strong>Usuario No Existe</strong> , Revise e Inténtelo de Nuevo.
-   </div>
-   </div>
-   </div>
-   </div>
-  <?php
+
+
+
+
+  if ($codigo==404){ /*Si el usuario no esta registrado, muestra alerta*/
+   $alert = new Alerta("Usuario no registrado", ", Revise e intentelo de nuevo");
+   $alert->mostrar();
   }
 
-  if ($codigo==401){
-  ?>
-   <div class="ubicacion">
-   <div class="container">
-   <div class="col-md-6">
-   <div class="alert alert-info alert-dismissable">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-    <strong>Contraseña Incorrecta</strong> , Revise e Inténtelo de Nuevo.
-   </div>
-   </div>
-   </div>
-   </div>
-  <?php
+
+
+  if ($codigo==401){ /*Si la contraseña del usuario no es la correcta, muestra correcta*/
+    $alert = new Alerta("Contraseña incorrecta", ", Revise e intentelo de nuevo");
+    $alert->mostrar();
   }
-  if ($codigo==200){
+
+
+  if ($codigo==200){ /*Si no, te lleva a iniciar sesión */
     $url='bienvenido.php';
     header("Location: $url");
   }
+
+
  }
 ?>
+
+
+<section class="container">
+<ul>
+<li><img id ="icono" src="cloud.svg" height="40" width="40"/><b id="descripcion_icon">Si ya tienes una cuenta inicia sesión para ver tus tareas.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
+<li><img id ="icono" src="smartphone.svg" height="40" width="40"/><b id="descripcion_icon">Disponible en dispositivos Android.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
+</ul>
+</section>
 
 
 <footer>
