@@ -45,6 +45,32 @@
     </form>
 
 
+
+<?php   //botones de navegacion
+session_start();
+
+      if (isset($_SESSION['username'])){
+       $url='bienvenido.php';
+       header("Location: $url");
+      }
+      else if(isset($_POST['homepag'])){
+         $url = 'index.php';
+         header("Location:$url");
+       }
+      else if(isset($_POST['registrarsepag'])){
+         $url = 'Registro.php';
+         header("Location:$url");
+       }
+      else if(isset($_POST['iniciopag'])){
+        $url = 'Inicio.php';
+        header("Location:$url");
+       }
+?>
+
+
+
+
+
 <!-- -inicia el formulario-->
 <?php
   $nameErr = $namepErr = $apellidoErr =$passwordErr = $password2Err ="";
@@ -106,26 +132,13 @@
     }
   }
 ?>
-      
+
     </section>
   </header>
 
 
 
-<?php   //botones de navegacion
-  if(isset($_POST['homepag'])){
-     $url = 'index.php';
-     header("Location:$url");
-   }
-  else if(isset($_POST['registrarsepag'])){
-     $url = 'Registro.php';
-     header("Location:$url");
-   }
-  else if(isset($_POST['iniciopag'])){
-    $url = 'Inicio.php';
-    header("Location:$url");
-   }
-?>
+
 
 
 <section class ="container">
