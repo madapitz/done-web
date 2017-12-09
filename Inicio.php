@@ -44,6 +44,34 @@ ob_start();
   </header>
 
 
+  <?php /*Botones de la página de inicio*/
+     session_start();
+
+  if (isset($_SESSION['username'])){
+      $url='bienvenido.php';
+     header("Location: $url");
+  }
+  else if(isset($_POST['homepag'])){
+     $url = 'index.php';
+     header("Location:$url");
+   }
+  else if(isset($_POST['registrarsepag'])){
+     $url = 'Registro.php';
+     header("Location:$url");
+   }
+  else if(isset($_POST['iniciopag'])){
+    $url = 'Inicio.php';
+    header("Location:$url");
+   }
+  else if (isset($_POST["olvidecontra"])){ // si presionas olvide mi contrasena, te lleva a recuperar contraseña
+   $url ="recuperarcontrasena.php";
+   header("Location: $url");
+  }
+  ?>
+
+
+
+
 
 
 
@@ -82,28 +110,6 @@ ob_start();
 
 </table>
 </section>
-
-
-
-<?php /*Botones de la página de inicio*/
-if(isset($_POST['homepag'])){
-   $url = 'index.php';
-   header("Location:$url");
- }
-else if(isset($_POST['registrarsepag'])){
-   $url = 'Registro.php';
-   header("Location:$url");
- }
-else if(isset($_POST['iniciopag'])){
-  $url = 'Inicio.php';
-  header("Location:$url");
- }
-else if (isset($_POST["olvidecontra"])){ // si presionas olvide mi contrasena, te lleva a recuperar contraseña
- $url ="recuperarcontrasena.php";
- header("Location: $url");
-}
-?>
-
 
 
 
@@ -181,6 +187,8 @@ include ("Alerta.php");
 
 
   if ($codigo==200){ /*Si no, te lleva a iniciar sesión */
+    session_start();
+    $_SESSION['username'] = $nombre;
     $url='bienvenido.php';
     header("Location: $url");
   }

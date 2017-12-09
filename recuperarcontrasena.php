@@ -29,11 +29,31 @@
 
 
   <header>
-    <section class ="container">
-     <h3 class="titulo text-center">Done!</h3>
-     <h1>Recupera tu contraseña</h1>
-    </section>
+    <header>
+      <section class ="container">
+       <h3 class="titulo text-center">Done!</h3>
+       <h1>Recupera tu contraseña</h1>
+       <form method="POST" class="text-center" style="display:inline; margin:0; padding:0;">
+         <input name="iniciopag" type="submit" class="btn boton" id="botonav" value="Atrás" />
+       </form>
+      </section>
+    </header>
   </header>
+
+
+  <?php /*Botones de la página de inicio*/
+     session_start();
+
+  if (isset($_SESSION['username'])){
+      $url='bienvenido.php';
+     header("Location: $url");
+  }
+  else if(isset($_POST['iniciopag'])){
+    $url = 'Inicio.php';
+    header("Location:$url");
+   }
+  ?>
+
 
 
 
