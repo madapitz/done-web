@@ -79,7 +79,7 @@ div#barra-lateral{
 }
 
 div#barra-lateral:hover{
-	width:190px;
+	width:200px;
 }
 
 div#logo-menu{
@@ -135,19 +135,20 @@ div#body{
 	position:absolute;
 	right:0px;
 	min-height:300px;
-	left:170px;
+	left:150px;
+	top: 40px;
 }
 
 div#texto{
-	width:50%;
+	width:60%;
 	min-height:300px;
-	float:left;
 }
 
 p#texto-contenedor-1{
 	font-size:25px;
 	margin:30px;
 	margin-top:50px;
+	margin-left: 45px;
 	color:#595959;
 }
 
