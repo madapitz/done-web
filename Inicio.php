@@ -138,25 +138,38 @@ include ("Alerta.php");
           curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
           //Configurar el content type a application/json
           curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-          curl_exec($ch);
-          /*if (!curl_errno($ch)) {
-            switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
-              case 200: #OK
-                break;
-              case 400: echo 'Bad request';
-                break;
-              case 404: echo 'Not found';
-                break;
-              default: echo 'Código http inesperado: ', $http_code, "\n";
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          $json = curl_exec($ch);
+          $co =json_decode($json);
+          //$codigo = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+          if ($co->codigo=='0'){
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_VERBOSE, 1);
+            curl_setopt($ch, CURLOPT_HEADER, 1);
+            $response = curl_exec($ch);
+            $header=print_r($response,TRUE);
+            $bandera=TRUE;
+            $longitud=strlen($header);
+            $n=0;
+            $c=0;
+            $token='';
+            while (($longitud>$n)&($bandera)) {
+              if (substr($header,$n,8)=='X-Auth: '){
+              $n= $n +8;
+              $bandera=FALSE;
+                while (substr($header,$n,12)!='Content-Type') {
+                  $token = $token.$header[$n];
+                  $n ++;
+                }
             }
-          }*/
-          //echo curl_getinfo($ch, CURLINFO_HTTP_CODE);
-          $codigo = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $n ++;
+           }
+           echo $token;
+          }
           //curl_getinfo($ch, CURLINFO_HTTP_CODE);
           curl_close($ch);
-          return($codigo);
-        }
-
+          return($co->codigo);
+   }
 
  $nombre=' ';
  $clave=' ';
@@ -173,20 +186,24 @@ include ("Alerta.php");
 
 
 
-  if ($codigo==404){ /*Si el usuario no esta registrado, muestra alerta*/
+  if ($codigo=='1'){ /*Si el usuario no esta registrado, muestra alerta*/
    $alert = new Alerta("Usuario no registrado", ", Revise e intentelo de nuevo");
    $alert->mostrar();
   }
 
 
 
-  if ($codigo==401){ /*Si la contraseña del usuario no es la correcta, muestra correcta*/
+  if ($codigo=='2'){ /*Si la contraseña del usuario no es la correcta, muestra correcta*/
     $alert = new Alerta("Contraseña incorrecta", ", Revise e intentelo de nuevo");
     $alert->mostrar();
   }
 
+  if ($codigo=='3'){
+    $alert = new Alerta("Usuario Bloqueado", ", Su Nueva clave fue enviada a su correo");
+    $alert->mostrar();
+  }
 
-  if ($codigo==200){ /*Si no, te lleva a iniciar sesión */
+  if ($codigo=='0'){ /*Si no, te lleva a iniciar sesión */
     session_start();
     $_SESSION['username'] = $nombre;
     $url='bienvenido.php';

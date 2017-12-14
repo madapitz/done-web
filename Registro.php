@@ -127,7 +127,7 @@ session_start();
     $usuario1 = new Usuario($nombrep,$apellido,$nombre,$pass,$pass2,$email,$nacimiento);
   if (isset($_POST["enviando"])) {
     $cod = $usuario1->transformToJson();
-    if($cod == 400){
+    if($cod == '4'){
     	$nameErr = "El nombre de usuario ya existe";
     }
   }
