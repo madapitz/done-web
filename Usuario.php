@@ -68,13 +68,64 @@ function ImprimirDatosUsuario(){
           curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
           //Configurar el content type a application/json
           curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-          curl_exec($ch);
-          //if (!curl_errno($ch)) {
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          $mensaje = curl_exec($ch);
           $http_info = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+          if ($http_info!=200){
+            $co = print_r($mensaje,true);
+            echo $co;
+            $bandera=TRUE;
+            $longitud=strlen($co);
+            $error='';
+            $n=0;
+            while (($longitud>$n)&($bandera)) {
+              if (substr($co,$n,8)=='codigo":'){
+                $n = $n +8;
+                $bandera=false;
+                while (substr($co,$n,1)!=','){
+                  $error = $error.$co[$n];
+                  $n++;
+                }
+              }
+              $n++;
+            }
+          }
+          else{
+            $co = json_decode($mensaje);
+            $error = $co->codigo;
+          }
+          //if (!curl_errno($ch)) {
+          if ($error=='0'){
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_VERBOSE, 1);
+            curl_setopt($ch, CURLOPT_HEADER, 1);
+            $response = curl_exec($ch);
+            $header=print_r($response,TRUE);
+            $bandera=TRUE;
+            $longitud=strlen($header);
+            $n=0;
+            $c=0;
+            $token='';
+            while (($longitud>$n)&($bandera)) {
+              if (substr($header,$n,8)=='X-Auth: '){
+              $n= $n +8;
+              $bandera=FALSE;
+                while (substr($header,$n,12)!='Content-Type') {
+                  $token = $token.$header[$n];
+                  $n ++;
+                }
+            }
+            $n ++;
+           }
+           echo $token;
+           //echo $header;
+          }
+          //$http_info = curl_getinfo($ch, CURLINFO_HTTP_CODE);
           //}
-          curl_getinfo($ch, CURLINFO_HTTP_CODE);
+          //curl_getinfo($ch, CURLINFO_HTTP_CODE);
           curl_close($ch);
-          return $http_info;
+          echo $error;
+          return ($error);
 
         }
 
