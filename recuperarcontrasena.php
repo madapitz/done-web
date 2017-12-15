@@ -11,17 +11,12 @@
 <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet"/> <!--font-family: 'Space Mono', monospace;-->
 <link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet"/> <!--font-family: 'Megrim', cursive;-->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/> <!--font-family: 'Roboto', sans-serif;-->
-
-
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-
-<link rel ="stylesheet" href="estilos.css"/>
+<link rel ="stylesheet" href="views/styles/estilos.css"/>
 
 </head>
 <body>
@@ -194,7 +189,7 @@ enviarcontrasena($nuevacontra);
 
 <section class="container">
 <ul>
-<li><img id ="icono" src="code.svg" height="40" width="40"/><b id="descripcion_icon">Si olvidaste tu contraseña ingresa tu email de registro.</b><p id = "descripcion_icon" style ="text-align:none;"> Con tu email de registro podremos saber cual es tu contraseña, tu nueva contraseña será enviada a tu correo.</p></li>
+<li><img id ="icono" src="views/images/code.svg" height="40" width="40"/><b id="descripcion_icon">Si olvidaste tu contraseña ingresa tu email de registro.</b><p id = "descripcion_icon" style ="text-align:none;"> Con tu email de registro podremos saber cual es tu contraseña, tu nueva contraseña será enviada a tu correo.</p></li>
 </ul>
 </section>
 
