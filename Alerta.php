@@ -34,10 +34,7 @@
 
 
 function mostrar(){
-
-
   ?>
-
   <div class="container">
     <div class="ubicacion">
      <div class="col-md-6">
@@ -48,21 +45,10 @@ function mostrar(){
        </div>
      </div>
    </div>
-
-
-
   <?php
-
-
-  }
-
-
-
-
 }
 
 
-
-
+}
 
 ?>

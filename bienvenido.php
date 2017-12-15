@@ -10,7 +10,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 
 
-  <link rel="stylesheet" type="text/css" href="estiloPagTareas.css">
+  <link rel="stylesheet" type="text/css" href="views/styles/estiloPagTareas.css">
   <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
   <script src="https://use.fontawesome.com/5643167d36.js"></script>
 
@@ -62,12 +62,17 @@
     </a>
 
         <?php
+        include("Token.php");
           session_start();
           if (isset($_SESSION['username'])){ ?>
             <p class="title-menu"><?php echo $_SESSION['username'];?></p>
             <?php
           }else{
             header('Location: Inicio.php');
+          }
+          if (isset($_SESSION['token'])){ 
+          	  $token = new Token($_SESSION['token']);
+          	  $DatosUsuario = $token->ConsultarDatosUsuario();
           }
           ?>
 
