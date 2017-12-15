@@ -1,4 +1,7 @@
 ﻿<!--Formulario de prueba-->
+<?php
+ob_start();
+?>
 <!doctype html>
 <html>
 <head>
@@ -11,15 +14,11 @@
 <link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet"/> <!--font-family: 'Megrim', cursive;-->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/> <!--font-family: 'Roboto', sans-serif;-->
 <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
-
-
 <script src="https://use.fontawesome.com/5643167d36.js"></script>
-<link rel ="stylesheet" href="estilos.css"/>
+<link rel ="stylesheet" href="views/styles/estilos.css"/>
 
 
 <style type="text/css">
@@ -122,15 +121,6 @@ session_start();
       return "Las contrasenas no coinciden";
     }
   }
-
-  include("Usuario.php");
-    $usuario1 = new Usuario($nombrep,$apellido,$nombre,$pass,$pass2,$email,$nacimiento);
-  if (isset($_POST["enviando"])) {
-    $cod = $usuario1->transformToJson();
-    if($cod == '4'){
-    	$nameErr = "El nombre de usuario ya existe";
-    }
-  }
 ?>
 
     </section>
@@ -217,17 +207,80 @@ session_start();
 <!-- -termina el formulario-->
 </section>
 
+
+
+
+<?php
+
+
+include("Usuario.php");
+include("Alerta.php");
+
+
+
+if (isset($_POST["enviando"])) {
+  $usuario = new Usuario();
+  $usuario = Usuario::conRegistro($nombrep,$apellido,$nombre,$pass,$pass2,$email,$nacimiento);
+
+
+  $codigo = $usuario->transformToJson_registro();
+
+
+  if($codigo == '4'){
+    /*$nameErr = "El nombre de usuario ya existe";*/
+    $alert = new Alerta("No puedes registrarte", ",Ese usuario ya existe");
+    $alert->mostrar();
+  }
+
+  if($codigo == '24'){
+   $alert = new Alerta("No puedes registrarte", ",Eres menor de edad");
+   $alert->mostrar();
+  }
+
+  if ($codigo == '5'){
+   $alert = new Alerta ("No puedes registrarte", ",Ese correo ya está en uso");
+   $alert->mostrar();
+  }
+
+  if ($codigo == '0'){
+    $url='Inicio.php';
+    header("Location: $url");
+  }
+
+
+
+
+}
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <section class="container" >
-
 <ul>
-<li><img id ="icono" src="plus.svg" height="40" width="40"/><b id="descripcion_icon">Añade tareas por hacer.</b> <p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
-<li><img id ="icono" src="error.svg" height="40" width="40"/><b id="descripcion_icon">Elimina tareas añadidas.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
-<li><img id ="icono" src="success.svg" height="40" width="40"/><b id="descripcion_icon">Marca tus tareas como completadas.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
-<li><img id ="icono" src="laptop.svg" height="40" width="40"/><b id="descripcion_icon">Disponible en web.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
-<li><img id ="icono" src="smartphone.svg" height="40" width="40"/><b id="descripcion_icon">Disponible en dispositivos Android.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
-<li><img id ="icono" src="list.svg" height="40" width="40"/><b id="descripcion_icon">Categoriza tus tareas.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
+<li><img id ="icono" src="views/images/plus.svg" height="40" width="40"/><b id="descripcion_icon">Añade tareas por hacer.</b> <p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
+<li><img id ="icono" src="views/images/error.svg" height="40" width="40"/><b id="descripcion_icon">Elimina tareas añadidas.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
+<li><img id ="icono" src="views/images/success.svg" height="40" width="40"/><b id="descripcion_icon">Marca tus tareas como completadas.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
+<li><img id ="icono" src="views/images/laptop.svg" height="40" width="40"/><b id="descripcion_icon">Disponible en web.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
+<li><img id ="icono" src="views/images/smartphone.svg" height="40" width="40"/><b id="descripcion_icon">Disponible en dispositivos Android.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
+<li><img id ="icono" src="views/images/list.svg" height="40" width="40"/><b id="descripcion_icon">Categoriza tus tareas.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
 </ul>
-
 </section>
 
 
@@ -235,3 +288,6 @@ session_start();
 </body>
 
 </html>
+<?php
+ob_end_flush();
+?>
