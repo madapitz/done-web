@@ -62,12 +62,17 @@
     </a>
 
         <?php
+        include("Token.php");
           session_start();
           if (isset($_SESSION['username'])){ ?>
             <p class="title-menu"><?php echo $_SESSION['username'];?></p>
             <?php
           }else{
             header('Location: Inicio.php');
+          }
+          if (isset($_SESSION['token'])){ 
+          	  $token = new Token($_SESSION['token']);
+          	  $DatosUsuario = $token->ConsultarDatosUsuario();
           }
           ?>
 
