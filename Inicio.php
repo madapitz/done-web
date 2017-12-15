@@ -14,16 +14,12 @@ ob_start();
 <link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet"/> <!--font-family: 'Megrim', cursive;-->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/> <!--font-family: 'Roboto', sans-serif;-->
 <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-
-<link rel ="stylesheet" href="estilos.css"/>
+<link rel ="stylesheet" href="views/styles/estilos.css"/>
 </head>
 
 
@@ -42,6 +38,8 @@ ob_start();
      </form>
     </section>
   </header>
+
+
 
 
   <?php /*Botones de la página de inicio*/
@@ -67,11 +65,9 @@ ob_start();
    $url ="recuperarcontrasena.php";
    header("Location: $url");
   }
+
+
   ?>
-
-
-
-
 
 
 
@@ -85,7 +81,7 @@ ob_start();
   <form  action="Inicio.php" method="POST">
    <table align = "center">
     <tr>
-      <td id ="identificadorentrada">Nombre de Usuario</td>
+      <td id ="identificadorentrada">Usuario/Correo</td>
       <td><label for="nombre_usuario"></label>
       <input type="text" name="nombre_usuario" id="nombre_usuario"  placeholder="Usuario" autocomplete="off" required></td>
     </tr>
@@ -123,89 +119,42 @@ include ("Alerta.php");
 
 
 
-  function transformToJson($usuario, $clave){
-          $data = array(
-            'username' => $usuario,
-            'password' => $clave,
-          );
-          $json = json_encode($data);
-          $url = 'https://intense-lake-39874.herokuapp.com/usuarios/login';
-          //Iniciar cURL
-          $ch = curl_init($url);
-          //Decir a curl que se quiere mandar un POST
-          curl_setopt($ch, CURLOPT_POST, 1);
-          //Adjuntar el json string al POST
-          curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
-          //Configurar el content type a application/json
-          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          $json = curl_exec($ch);
-          $co =json_decode($json);
-          //$codigo = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-          if ($co->codigo=='0'){
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_VERBOSE, 1);
-            curl_setopt($ch, CURLOPT_HEADER, 1);
-            $response = curl_exec($ch);
-            $header=print_r($response,TRUE);
-            $bandera=TRUE;
-            $longitud=strlen($header);
-            $n=0;
-            $c=0;
-            $token='';
-            while (($longitud>$n)&($bandera)) {
-              if (substr($header,$n,8)=='X-Auth: '){
-              $n= $n +8;
-              $bandera=FALSE;
-                while (substr($header,$n,12)!='Content-Type') {
-                  $token = $token.$header[$n];
-                  $n ++;
-                }
-            }
-            $n ++;
-           }
-           echo $token;
-          }
-          //curl_getinfo($ch, CURLINFO_HTTP_CODE);
-          curl_close($ch);
-          return($co->codigo);
-   }
-
- $nombre=' ';
- $clave=' ';
- $direccion=' ';
-
-
 
  if (isset($_POST["enviando"])) {
 
   $nombre=$_POST["nombre_usuario"];
   $clave=$_POST["contrasena_usuario"];
-  $codigo=TransformToJson($nombre,$clave);
 
 
 
 
-  if ($codigo=='1'){ /*Si el usuario no esta registrado, muestra alerta*/
+  $usuario = new Usuario();
+  $usuario = Usuario::conInicio($nombre,$clave);
+
+
+  $codigo = $usuario->transformtoJson_inicio();
+
+
+
+  if ($codigo[0]=='1'){ /*Si el usuario no esta registrado, muestra alerta*/
    $alert = new Alerta("Usuario no registrado", ", Revise e intentelo de nuevo");
    $alert->mostrar();
   }
 
-
-
-  if ($codigo=='2'){ /*Si la contraseña del usuario no es la correcta, muestra correcta*/
+  if ($codigo[0]=='2'){ /*Si la contraseña del usuario no es la correcta, muestra correcta*/
     $alert = new Alerta("Contraseña incorrecta", ", Revise e intentelo de nuevo");
     $alert->mostrar();
   }
 
-  if ($codigo=='3'){
+  if ($codigo[0]=='3'){
     $alert = new Alerta("Usuario Bloqueado", ", Su Nueva clave fue enviada a su correo");
     $alert->mostrar();
   }
 
-  if ($codigo=='0'){ /*Si no, te lleva a iniciar sesión */
+  if ($codigo[0]=='0'){ /*Si no, te lleva a iniciar sesión */
     session_start();
     $_SESSION['username'] = $nombre;
+    $_SESSION['token'] = $codigo[1];
     $url='bienvenido.php';
     header("Location: $url");
   }
@@ -215,17 +164,23 @@ include ("Alerta.php");
 ?>
 
 
+
+
 <section class="container">
 <ul>
-<li><img id ="icono" src="cloud.svg" height="40" width="40"/><b id="descripcion_icon">Si ya tienes una cuenta inicia sesión para ver tus tareas.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
-<li><img id ="icono" src="smartphone.svg" height="40" width="40"/><b id="descripcion_icon">Disponible en dispositivos Android.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
+<li><img id ="icono" src="views/images/cloud.svg" height="40" width="40"/><b id="descripcion_icon">Si ya tienes una cuenta inicia sesión para ver tus tareas.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
+<li><img id ="icono" src="views/images/smartphone.svg" height="40" width="40"/><b id="descripcion_icon">Disponible en dispositivos Android.</b><p id = "descripcion_icon" style ="text-align:none;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lorem quis cursus ullamcorper, leo leo pharetra risus, et fermentum nibh augue sed mauris. Nunc quis sapien id augue dignissim pellentesque eu ac lacus. Etiam vel diam nec augue pharetra gravida at vel odio.</p></li>
 </ul>
 </section>
+
+
 
 
 <footer>
 </footer>
 </body>
+
+
 
 </html>
 <?php
