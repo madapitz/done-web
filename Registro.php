@@ -1,4 +1,4 @@
-﻿<!--Formulario de prueba-->
+<!--Formulario de prueba-->
 <?php
 ob_start();
 ?>
