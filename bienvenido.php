@@ -108,6 +108,7 @@
 			<div id="texto">
 				 <p id="texto-contenedor-1">Aquí van las categorías listadas</p>
          <p id="texto-contenedor-1" style = "font-size:20px;"><?php $token->ConsultarTareas();?></p>
+         <p id="texto-contenedor-1" style = "font-size:20px;"> <?php $token->PostTareas("holaaaaaaa","probandooooooo","18/02/2018");?></p>
       </div>
 </div>
 

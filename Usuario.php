@@ -86,6 +86,7 @@ function transformToJson_registro(){
 
      $json = json_encode($data);
      $url = 'https://intense-lake-39874.herokuapp.com/usuarios';
+     
      //Iniciar cURL
      $ch = curl_init($url);
      //Decir a curl que se quiere mandar un POST
