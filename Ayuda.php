@@ -35,7 +35,7 @@
           <a class="dropdown-item" href="#">Crear tarea</a>
           <a class="dropdown-item" href="#">Crear lista de tareas</a>
           <a class="dropdown-item" href="#">Ver lista de tareas</a>
-          <a class="dropdown-item" href="#">Ver perfil</a>
+          <a class="dropdown-item" href="Perfil.php">Ver perfil</a>
           <a class="dropdown-item" href="Logout.php">Cerrar Sesión</a>
         </div>
       </li>
@@ -86,10 +86,6 @@
       </a>
      <p class="title-menu">configuracion</p>
     </div>
-
-			<div id="foto">
-		<img id="foto-contenedor-1" src="pictures/screen.png"/>
-	   </div>
 
 </div>
 

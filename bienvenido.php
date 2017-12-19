@@ -37,7 +37,7 @@
           <a class="dropdown-item" href="#">Crear tarea</a>
           <a class="dropdown-item" href="#">Crear lista de tareas</a>
           <a class="dropdown-item" href="#">Ver lista de tareas</a>
-          <a class="dropdown-item" href="#">Ver perfil</a>
+          <a class="dropdown-item" href="Perfil.php">Ver perfil</a>
           <a class="dropdown-item" href="Logout.php">Cerrar Sesión</a>
         </div>
       </li>
@@ -70,15 +70,19 @@
           }else{
             header('Location: Inicio.php');
           }
-          if (isset($_SESSION['token'])){ 
+
+
+          if (isset($_SESSION['token'])){
           	  $token = new Token($_SESSION['token']);
           	  $DatosUsuario = $token->ConsultarDatosUsuario();
+/////////
           }
-          ?>
+      ?>
+
+
+
 
 	</div>
-
-
       <div class="contenedor-logos">
         <a href ="Ayuda.php">
       <div class="logo-ayuda">
@@ -95,10 +99,6 @@
      <p class="title-menu">configuracion</p>
     </div>
 
-			<div id="foto">
-		<img id="foto-contenedor-1" src="pictures/screen.png"/>
-	   </div>
-
 </div>
 
 
@@ -106,13 +106,12 @@
 
 <div id="body" class = "container">
 			<div id="texto">
-				<p id="texto-contenedor-1">Aquí van las categorías listadas</p>
-        <p id="texto-contenedor-1" style = "font-size:20px;">* Categoría 1 - Descripción - Enlace</p>
-          <p id="texto-contenedor-1" style = "font-size:20px;">* Categoría 2 - Descripción - Enlace</p>
-            <p id="texto-contenedor-1" style = "font-size:20px;">* Categoría 3 - Descripción - Enlace</p>
-              <p id="texto-contenedor-1" style = "font-size:20px;">* Categoría 4 - Descripción - Enlace</p>
-               </div>
+				 <p id="texto-contenedor-1">Aquí van las categorías listadas</p>
+         <p id="texto-contenedor-1" style = "font-size:20px;"><?php $token->ConsultarTareas();?></p>
+      </div>
 </div>
+
+
 
 </body>
 </html>
