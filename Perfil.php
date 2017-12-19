@@ -1,8 +1,8 @@
-<!--Pagina de configuracion / cambiar contraseña / cambiar correo, etc-->
+<!--Pagina de ayuda con sesión iniciada -->
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Done! - configuracion</title>
+  <title>Done! - ayuda</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
@@ -59,18 +59,25 @@
 			</div>
     </a>
 
-        <?php
+     <?php
+          include("Token.php");
           session_start();
-          if (isset($_SESSION['username'])){ ?>
-            <p class="title-menu"><?php echo $_SESSION['username'];?></p>
-            <?php
-          }else{
-            header('Location: Inicio.php');
-          }
-          ?>
+           if (isset($_SESSION['username'])){ ?>
+             <p class="title-menu"><?php echo $_SESSION['username'];?></p>
+           <?php
+           }else{
+             header('Location: Inicio.php');
+           }
+           
+           if (isset($_SESSION['token'])){
+            $token = new Token($_SESSION['token']);
+            $DatosUsuario = $token->ConsultarDatosUsuario();
+           }
+  ?>
+
+
 
 	</div>
-
       <div class="contenedor-logos">
         <a href ="Ayuda.php">
       <div class="logo-ayuda">
@@ -79,25 +86,39 @@
       <p class="title-menu">ayuda</p>
      </div>
 
-     <div class="contenedor-logos">
+      <div class="contenedor-logos">
        <a href ="Configuracion.php">
      <div class="logo-config">
      </div>
       </a>
      <p class="title-menu">configuracion</p>
-    </div>
+      </div>
 </div>
+
 
 
 
 
 <div id="body" class = "container">
 			<div id="texto">
-				<p id="texto-contenedor-1">Página de Configuracion</p>
-        <p id="texto-contenedor-1" style = "font-size:20px;">* Cambiar correo</p>
-          <p id="texto-contenedor-1" style = "font-size:20px;">* Cambiar contraseña</p>
-               </div>
+				<p id="texto-contenedor-1">Perfil de Usuario</p>
+        <p id="texto-contenedor-1" style = "font-size:20px;">* Datos del usuario
+
+        <?php
+         //esto es una prueba
+           echo "<br><br>";
+             echo "ID: ".$DatosUsuario[0]. "<br>";
+             echo "Correo de registro: ".$DatosUsuario[1]. "<br>";
+             echo "Nombre de Usuario: ".$DatosUsuario[2]. "<br>";
+             echo "Nombre: ".$DatosUsuario[3]. "<br>";
+             echo "Apellido: ".$DatosUsuario[4]. "<br>";
+             echo "Fecha de Nacimiento: ".$DatosUsuario[5]. "<br>";
+         ?>
+        </p>
+      </div>
 </div>
+
+
 
 </body>
 </html>
