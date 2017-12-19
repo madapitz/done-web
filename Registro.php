@@ -1,4 +1,4 @@
-<!--Formulario de prueba-->
+﻿<!--Formulario de prueba-->
 <?php
 ob_start();
 ?>
@@ -242,6 +242,10 @@ if (isset($_POST["enviando"])) {
    $alert->mostrar();
   }
 
+  if ($codigo == '15'){
+    $alert = new Alerta ("No puedes registrarte", ",La contraseña debe tener 8 caracteres mínimo");
+    $alert->mostrar();
+  }
   if ($codigo == '0'){
     $url='Inicio.php';
     header("Location: $url");
