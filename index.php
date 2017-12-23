@@ -2,13 +2,12 @@
 <html lang="es-VE">
 <html>
 
-<!--Este es el archivo donde comienza la pagina cuando se carga-->
+<!--Este es el archivo donde comienza la pagina cuando se carga, necesario que se llame index.php o index.html-->
 
 
 <head>
-
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <link rel="shortcut icon" href="views/images/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Done!</title>
   <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet" />  <!--font-family: 'Quicksand', sans-serif;-->
@@ -19,23 +18,25 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="views/styles/estilos1.css" />
+  <?php include("controladores/session_index_controller.php") //pregunta si la sesión esta abierta?>
 </head>
+
+
 
 
 <body>
   <header>
-    <!--<div id="logo">-->
     <h1 class="titulo text-center">Done!</h1>
     <!--</div>-->
-    <form action="index.php" method="POST" class="text-center">
-      <input name="Registro" type="submit" class="btn boton" value="Registrar Usuario" />
-      <input name="Inicio" type="submit" class="btn btn-primary boton" value="Iniciar Sesion" />
+    <form action="controladores/nav_button_controller.php" method="POST" class="text-center">
+      <input name="registrarsepag" type="submit" class="btn boton" value="Registrar Usuario"/>
+      <input name="iniciopag" type="submit" class="btn btn-primary boton" value="Iniciar Sesion"/>
     </form>
   </header>
 
+
   <section class="container">
    <ul>
-
      <li><i class="fa fa-sort-amount-asc fa-3x izq" aria-hidden="true"></i>Organiza tus tareas</li>
      <li>No olvides tus cosas por hacer <i class="fa fa-ban fa-3x der" aria-hidden="true"></i></li>
      <li><i class="fa fa-cloud-upload fa-3x izq" aria-hidden="true"></i>Tus tareas se mantienen en la nube</li>
@@ -43,24 +44,12 @@
     </ul>
   </section>
 
+
   <footer>
-    <a href="app-release.apk"><img src="views/images/google-play-badge.png" class="img-google-play"/></a>
+    <a href="views/more/app-release.apk"><img src="views/images/google-play-badge.png" class="img-google-play"/></a>
   </footer>
-
-
-  <?php
-
-  session_start();
-    $url = '';
-   if (isset($_SESSION['username']))
-   $url='bienvenido.php';
-   else if ( isset($_POST['Registro']) )
-    $url = 'Registro.php';
-   else if ( isset($_POST['Inicio']) )
-    $url = 'Inicio.php';
-   header("Location: $url");
- ?>
 
 </body>
 
 </html>
+<!-- end -->
