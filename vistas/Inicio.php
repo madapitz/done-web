@@ -74,7 +74,7 @@
 
 
 
-<?php include("../controladores/inicio_controller.php") // controlador de inicio de sesion ?>
+<?php include("../controladores/Inicio_controller.php") // controlador de inicio de sesion ?>
 
 
 
