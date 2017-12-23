@@ -41,7 +41,7 @@ include ("../Alerta.php");
       session_start();
       $_SESSION['username'] = $nombre;
       $_SESSION['token'] = $codigo[1];
-      $url='bienvenido.php';
+      $url='../vistas/bienvenido.php';
       header("Location: $url");
       break;
 
