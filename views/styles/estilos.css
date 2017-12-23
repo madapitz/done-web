@@ -249,3 +249,7 @@ text-align: center;
 	  background-color: gray;
 		height: 20px;
 	}
+
+	.error{
+    color: red;
+  }

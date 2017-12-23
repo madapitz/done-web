@@ -133,6 +133,8 @@ function transformToJson_registro(){
 
 /*verficar inicio de sesion*/
 function transformtoJson_inicio(){
+  $array = array(-1,0);
+
   $data = array(
             'username' => $this->id,
             'password' => $this->contrasena
