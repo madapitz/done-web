@@ -28,7 +28,7 @@
     if(empty($_POST["contrasena_usuario_repetir"])){
       $password2Err = "Se requiere que repita la contraseña";
     } else{
-      $pass2 = comprobar($_POST["contrasena_usuario_repetir"], $password2Err);
+      $pass2 = comprobar($_POST["contrasena_usuario_repetir"], $password2Err); 
       $password2Err = validarContrasenas($_POST["contrasena_usuario"],$_POST["contrasena_usuario_repetir"]);
     }
   }
