@@ -56,7 +56,7 @@ public function PostTareas($titulo, $descripcion, $fecha){
       $data = array(
         'titulo' => $titulo,
         'descripcion' => $descripcion,
-        'fechaParaSerCompletada' => $fecha
+        //'fechaParaSerCompletada' => $fecha
       );
 
       $json = json_encode($data);
@@ -66,7 +66,9 @@ public function PostTareas($titulo, $descripcion, $fecha){
       $ch = curl_init($url);
 
 
-  $this->tokenid = mb_convert_encoding($this->tokenid, "UTF-8");
+  $this->tokenid = substr($this->tokenid,0,-2);
+  $tokenid = $this->tokenid;
+  $st2 = "x-auth: ".$tokenid;
 
 
     curl_setopt_array($ch, array(
@@ -80,7 +82,7 @@ public function PostTareas($titulo, $descripcion, $fecha){
       CURLOPT_POSTFIELDS => $json,
       CURLOPT_HTTPHEADER => array(
         'Content-Type: application/json',
-          'X-AUTH: '.$this->tokenid
+        $st2
       )
     ));
 
@@ -102,10 +104,6 @@ public function PostTareas($titulo, $descripcion, $fecha){
 ///////////////////////////////////////////
 //////////////////////////////////////////
 //////////////////////////////////////////
-
-
-
-
 
 
 public function BorrarToken(){
