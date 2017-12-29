@@ -60,7 +60,7 @@
       <td id="identificadorentrada">Nombre</td>
       <td>
         <label for="nombre_persona"></label>
-        <input type="text" name="nombre_persona" id="nombre_persona" placeholder="Introduzca su nombre" value="<?php if (isset($_SESSION['nombre_persona'])){ echo $_SESSION['nombre_persona'];} ?>" required><a href="#" data-toggle="tooltip" title="<?php echo $namepErr; ?>"> 
+        <input type="text" name="nombre_persona" id="nombre_persona" placeholder="Introduzca su nombre" value="<?php if (isset($_SESSION['nombre_persona'])){ echo $_SESSION['nombre_persona'];} ?>" required><a href="#" data-toggle="tooltip" title="<?php echo $namepErr; ?>">
         </a>
       </td>
     </tr>
@@ -76,31 +76,31 @@
     <tr>
       <td id ="identificadorentrada">E-mail</td>
       <td><label for="email_usuario"></label>
-      <input type="email" name="email_usuario" id="email_usuario" placeholder="Introduzca un email válido" value="<?php if (isset($_SESSION['email_usuario'])){ echo $_SESSION['email_usuario'];} ?>"><a href="#" data-toggle="tooltip" title="" required> 
+      <input type="email" name="email_usuario" id="email_usuario" placeholder="Introduzca un email válido" value="<?php if (isset($_SESSION['email_usuario'])){ echo $_SESSION['email_usuario'];} ?>"><a href="#" data-toggle="tooltip" title="" required>
         </a></td>
     </tr>
     <tr>
       <td id ="identificadorentrada">Nombre de usuario</td>
       <td><label for="nombre_usuario"></label>
-      <input type="text" name="nombre_usuario" id="nombre_usuario" placeholder="Elija nombre de usuario" value="<?php if (isset($_SESSION['nombre_usuario'])){ echo $_SESSION['nombre_usuario'];} ?>" required><a href="#" data-toggle="tooltip" title="<?php echo $nameErr; ?>"> 
+      <input type="text" name="nombre_usuario" id="nombre_usuario" placeholder="Elija nombre de usuario" value="<?php if (isset($_SESSION['nombre_usuario'])){ echo $_SESSION['nombre_usuario'];} ?>" required><a href="#" data-toggle="tooltip" title="<?php echo $nameErr; ?>">
         </a></td>
     </tr>
     <tr>
       <td id ="identificadorentrada">Contraseña</td>
       <td><label for="contrasena_usuario"></label>
-      <input type="password" name="contrasena_usuario" id="contrasena_usuario" placeholder="Elija constraseña" value="<?php if (isset($_SESSION['contrasena_usuario'])){ echo $_SESSION['contrasena_usuario'];} ?>" required=""><a href="#" data-toggle="tooltip" title="<?php echo $passwordErr; ?>"> 
+      <input type="password" name="contrasena_usuario" id="contrasena_usuario" placeholder="Elija constraseña" value="<?php if (isset($_SESSION['contrasena_usuario'])){ echo $_SESSION['contrasena_usuario'];} ?>" required=""><a href="#" data-toggle="tooltip" title="<?php echo $passwordErr; ?>">
         </a></td>
     </tr>
     <tr>
       <td id ="identificadorentrada">Repetir contraseña</td>
       <td><label for="contrasena_usuario_repetir"></label>
-      <input type="password" name="contrasena_usuario_repetir" id="constrasena_usuario_repetir" placeholder="Verificar contraseña" value="<?php if (isset($_SESSION['contrasena_usuario_repetir'])){ echo $_SESSION['contrasena_usuario_repetir'];} ?>" required><a href="#" data-toggle="tooltip" title="<?php echo $password2Err; ?>"> 
+      <input type="password" name="contrasena_usuario_repetir" id="constrasena_usuario_repetir" placeholder="Verificar contraseña" value="<?php if (isset($_SESSION['contrasena_usuario_repetir'])){ echo $_SESSION['contrasena_usuario_repetir'];} ?>" required><a href="#" data-toggle="tooltip" title="<?php echo $password2Err; ?>">
         </a></td>
     </tr>
     <tr>
       <td id ="identificadorentrada">Fecha de nacimiento</td>
       <td><label for="fecha_nacimiento"></label>
-      <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="<?php if (isset($_SESSION['fecha_nacimiento'])){ echo $_SESSION['fecha_nacimiento'];} ?>" ><a href="#" data-toggle="tooltip" title=""> 
+      <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="<?php if (isset($_SESSION['fecha_nacimiento'])){ echo $_SESSION['fecha_nacimiento'];} ?>" ><a href="#" data-toggle="tooltip" title="">
         </a></td>
     </tr>
     <tr>

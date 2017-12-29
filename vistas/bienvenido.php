@@ -41,7 +41,7 @@
           <i class="fa fa-bars" aria-hidden="true"></i>
         </a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Crear tarea</a>
+          <a class="dropdown-item" href="CrearTareas.php">Crear tarea</a>
           <a class="dropdown-item" href="#">Crear lista de tareas</a>
           <a class="dropdown-item" href="#">Ver lista de tareas</a>
           <a class="dropdown-item" href="Perfil.php">Ver perfil</a>
@@ -133,7 +133,6 @@
          ?>
 
          </p>
-         <p id="texto-contenedor-1" style = "font-size:20px; background-color:white;"> <?php $token->PostTareas("holaaaaaaa","probandooooooo","18/02/2018");?></p>
       </div>
 </div>
 
