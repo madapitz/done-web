@@ -2,7 +2,7 @@
 @session_start();
 session_destroy();
 
-include("../Token.php");
+include("../modelos/Token.php");
 
 
 $token = new Token($_SESSION['token']);

@@ -69,7 +69,7 @@
     </a>
 
         <?php
-        include("../Token.php");
+        include("../modelos/Token.php");
           session_start();
           if (isset($_SESSION['username'])){ ?>
             <p class="title-menu"><?php echo $_SESSION['username'];?></p>

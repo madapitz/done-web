@@ -1,5 +1,5 @@
 <?php
-include ("../Usuario.php");
+include ("../modelos/Usuario.php");
 include ("../Alerta.php");
 
 
