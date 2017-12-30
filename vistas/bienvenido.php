@@ -41,7 +41,7 @@
           <i class="fa fa-bars" aria-hidden="true"></i>
         </a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="Creartareas.php">Crear tarea</a>
+          <a class="dropdown-item" href="CrearTareas.php">Crear tarea</a>
           <a class="dropdown-item" href="#">Crear lista de tareas</a>
           <a class="dropdown-item" href="#">Ver lista de tareas</a>
           <a class="dropdown-item" href="Perfil.php">Ver perfil</a>
@@ -69,7 +69,7 @@
     </a>
 
         <?php
-        include("../Token.php");
+        include("../modelos/Token.php");
           session_start();
           if (isset($_SESSION['username'])){ ?>
             <p class="title-menu"><?php echo $_SESSION['username'];?></p>

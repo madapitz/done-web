@@ -1,8 +1,8 @@
 <?php
 
-  include("../Usuario.php");
+  include("../modelos/Usuario.php");
   include("../Alerta.php");
-  include("../Token.php");
+  include("../modelos/Token.php");
 
 
 if (isset($_SESSION['token'])){

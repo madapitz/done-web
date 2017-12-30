@@ -5,7 +5,7 @@ if (isset($_SESSION['username'])){ // pregunta si la sesión esta iniciada para 
  $url='../vistas/bienvenido.php';
 header("Location: $url");
 }
-include("../Usuario.php");
+include("../modelos/Usuario.php");
 include("../Alerta.php");
 
 
@@ -28,7 +28,7 @@ if (isset($_POST["enviando"])) {
   $usuario = new Usuario();
   $usuario = Usuario::conRegistro($nombrep,$apellido,$nombre,$pass,$pass2,$email,$nacimiento);
   $codigo = $usuario->transformToJson_registro();
-  
+
 
   switch ($codigo) {
 
@@ -100,7 +100,7 @@ if (isset($_POST["enviando"])) {
     case '0':
     #OK...
     session_destroy();
-    $url='Inicio.php';
+    $url='../vistas/Inicio.php';
     header("Location: $url");
     break;
 
