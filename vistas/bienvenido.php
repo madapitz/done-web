@@ -57,35 +57,15 @@
 
 <!-- Barra lateral -->
 <div id="barra-lateral">
-
 			<div id="logo-menu">
 			</div>
-
 	<div id="contenedor-logos-primero" class="contenedor-logos" >
-
     <a href ="bienvenido.php">
 		<div class="logo-perfil">
 			</div>
     </a>
 
-        <?php
-        include("../modelos/Token.php");
-          session_start();
-          if (isset($_SESSION['username'])){ ?>
-            <p class="title-menu"><?php echo $_SESSION['username'];?></p>
-            <?php
-          }else{
-            header('Location: Inicio.php');
-          }
-
-          if (isset($_SESSION['token'])){
-          	  $token = new Token($_SESSION['token']);
-          	  $DatosUsuario = $token->ConsultarDatosUsuario();
-          }
-      ?>
-
-
-
+<p class ="title-menu"> <?php include("../controladores/usuario_menu_controller.php"); ?> </p>
 
 	</div>
       <div class="contenedor-logos">
@@ -103,7 +83,6 @@
       </a>
      <p class="title-menu">configuracion</p>
     </div>
-
 </div>
 
 
@@ -116,7 +95,16 @@
 
 
         <?php
+
+         if (isset($_SESSION['token'])){
+
+          $token = new Token($_SESSION['token']);
+          $DatosUsuario = $token->ConsultarDatosUsuario();
+
          $datos = $token->ConsultarTareas();
+
+         //print_r($datos[0]);
+
          if (sizeof($datos[0])==0){
             echo "- Aun no tiene tareas registradas :( "."<br>";
             echo "Ve al menu y presiona crear tarea para agregar una tarea";
@@ -125,11 +113,18 @@
          echo " * Tarea ".($i+1)."<br>";
          echo "Titulo: ". $datos[0][$i]->titulo. "<br>";
          echo "Descripcion: ". $datos[0][$i]->descripcion. "<br>";
+         echo "id: ". $datos[0][$i]->_id. "<br>";
+         echo "completado: ". $datos[0][$i]->completado."<br>";
          echo "<br><br>";
-
 
          }
         }
+
+    //$token->EditarTarea("5a4c5cd1e6092500142f7d06","cambio");
+
+
+      }
+
          ?>
 
          </p>

@@ -98,9 +98,11 @@ function transformToJson_registro(){
           curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
           $mensaje = curl_exec($ch);
           $http_info = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+
           if ($http_info!=200){
             $co = print_r($mensaje,true);
-            /*echo $co;*/
+
             $bandera=TRUE;
             $longitud=strlen($co);
             $error='';
@@ -128,6 +130,8 @@ function transformToJson_registro(){
           //curl_getinfo($ch, CURLINFO_HTTP_CODE);
           curl_close($ch);
           return ($error);
+
+
 }
 
 
@@ -152,6 +156,9 @@ function transformtoJson_inicio(){
           curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
           curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
           $json = curl_exec($ch);
+
+          if ($json!=NULL){
+
           $co =json_decode($json);
 
           $token='';
@@ -185,6 +192,7 @@ function transformtoJson_inicio(){
           curl_close($ch);
           $array = array($co->codigo,$token);
           return($array);
+        }
 }
 
 

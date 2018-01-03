@@ -13,7 +13,7 @@
   <link rel="stylesheet" type="text/css" href="../views/styles/estiloPagTareas.css">
   <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
   <script src="https://use.fontawesome.com/5643167d36.js"></script>
-
+  <link rel ="stylesheet" href="../views/styles/estilos.css"/>
 </head>
 
 
@@ -50,37 +50,23 @@
 
 <!-- Barra lateral -->
 <div id="barra-lateral">
-
-			<div id="logo-menu">
-			</div>
-
+	<div id="logo-menu">
+	</div>
 	<div id="contenedor-logos-primero" class="contenedor-logos" >
 
     <a href ="bienvenido.php">
 		<div class="logo-perfil">
 			</div>
     </a>
-
-        <?php
-          session_start();
-          if (isset($_SESSION['username'])){ ?>
-            <p class="title-menu"><?php echo $_SESSION['username'];?></p>
-            <?php
-          }else{
-            header('Location: Inicio.php');
-          }
-          ?>
-
+    <p class ="title-menu"> <?php include("../controladores/usuario_menu_controller.php"); ?> </p>
 	</div>
-
       <div class="contenedor-logos">
         <a href ="Ayuda.php">
       <div class="logo-ayuda">
       </div>
-       </a>
-      <p class="title-menu">ayuda</p>
+        </a>
+        <p class="title-menu">ayuda</p>
      </div>
-
      <div class="contenedor-logos">
        <a href ="Configuracion.php">
      <div class="logo-config">
@@ -90,30 +76,18 @@
     </div>
 </div>
 
-<head>
-  <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet"/> <!--font-family: 'Quicksand', sans-serif;-->
-  <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet"/> <!--font-family: 'Space Mono', monospace;-->
-  <link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet"/> <!--font-family: 'Megrim', cursive;-->
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/> <!--font-family: 'Roboto', sans-serif;-->
-  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-  <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel ="stylesheet" href="../views/styles/estilos.css"/>
-</head>
 
 <!---inicia el formulario-->
  <tr>
-      <td>&nbsp;</td> <!--&nbsp crea un espacio horizontal-->
+ <td>&nbsp;</td> <!--&nbsp crea un espacio horizontal-->
  </tr>
+ <br>
+ <br>
+ <br>
 <section class ="container">
   <table style= "margin-left: 15%;">
   <h2>Cambiar Contraseña</h2>
-
   <form  action="Configuracion.php" method="POST">
-   
     <tr>
       <td id ="identificadorentrada">Contraseña Vieja</td>
       <td><label for="nombre_usuario"></label>
@@ -131,50 +105,12 @@
   <tr>
   <td colspan="2" align="center"><input name="enviando" type="submit" class="boton" value="Cambiar"/> <td>
   </tr>
-
      </form>
-
   </table>
  </section>
+<!--termina el formulario-->
 
-  <?php
-   include("../Alerta.php");
-   include("../modelos/Token.php");
-   if (isset($_POST["enviando"])) {
-      $viejaclave=$_POST["contrasena_vieja"];
-      $nuevaclave=$_POST["contrasena_usuario"];
-      if (isset($_SESSION['token'])){ 
-        $token = new Token($_SESSION['token']);
-        $respuesta = $token->CambiarClave($viejaclave,$nuevaclave);
-        switch ($respuesta) {
-          case '2':
-          # code...
-          $alert = new Alerta("Vieja Contraseña incorrecta", ", Revise e intentelo de nuevo");
-          $alert->mostrar();
-            break;
-          case '16':
-           #LIMITE CARACTERES
-          $alert = new Alerta ("Error,", "La nueva Contraseña debe ser menor a 50 caracteres");
-          $alert->mostrar();
-            break;
-          case '15':
-           #LIMITE CARACTERES
-          $alert = new Alerta ("Error,", "La nueva Contraseña debe ser mayor a 8 caracteres");
-          $alert->mostrar();
-            break;
-          case '0':
-          #LIMITE CARACTERES
-          $alert = new Alerta ("Correcto,", "Su contraseña ha sido cambiada correctamente");
-          $alert->mostrar();
-            break;
-          default:
-            $alert = new Alerta ("Algo salió mal :(", ", Los servicios de Done no están disponibles");
-            break;
-        }
-      }
-   }
-  ?>
+  <?php include("../controladores/cambiarcontrasena_controller.php"); ?>
 
 </body>
 </html>
-
