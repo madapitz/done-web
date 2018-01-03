@@ -1,6 +1,6 @@
 <?php
-include ("../modelos/Usuario.php");
-include ("../Alerta.php");
+include("../modelos/Usuario.php");
+include("../vistas/scripts/Alerta.php");
 
 
 

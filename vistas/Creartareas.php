@@ -58,30 +58,15 @@
 
 <!-- Barra lateral -->
 <div id="barra-lateral">
-
 			<div id="logo-menu">
 			</div>
-
 	<div id="contenedor-logos-primero" class="contenedor-logos" >
-
     <a href ="bienvenido.php">
 		<div class="logo-perfil">
 			</div>
     </a>
-
-        <?php
-          session_start();
-          if (isset($_SESSION['username'])){ ?>
-            <p class="title-menu"><?php echo $_SESSION['username'];?></p>
-            <?php
-          }else{
-            header('Location: Inicio.php');
-          }
-        ?>
+        <p class ="title-menu"> <?php include("../controladores/usuario_menu_controller.php"); ?> </p>
 	</div>
-
-
-
       <div class="contenedor-logos">
         <a href ="Ayuda.php">
       <div class="logo-ayuda">
@@ -89,7 +74,6 @@
        </a>
       <p class="title-menu">ayuda</p>
      </div>
-
      <div class="contenedor-logos">
        <a href ="Configuracion.php">
      <div class="logo-config">
@@ -97,7 +81,6 @@
       </a>
      <p class="title-menu">configuracion</p>
     </div>
-
 </div><!--Termina la barra lateral-->
 
 
@@ -105,9 +88,10 @@
 
 <div id="body" class = "container">
 			<div id="texto">
+        <br>
 				 <p id="texto-contenedor-1">Crear Tareas</p>
 
-
+<br>
     <table align ="center">
 
          <form method="post" name="crear_tarea_formulario" action="Creartareas.php">

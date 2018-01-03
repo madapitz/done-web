@@ -66,23 +66,7 @@
 			</div>
     </a>
 
-     <?php
-          include("../modelos/Token.php");
-          session_start();
-           if (isset($_SESSION['username'])){ ?>
-             <p class="title-menu"><?php echo $_SESSION['username'];?></p>
-           <?php
-           }else{
-             header('Location: Inicio.php');
-           }
-
-           if (isset($_SESSION['token'])){
-            $token = new Token($_SESSION['token']);
-            $DatosUsuario = $token->ConsultarDatosUsuario();
-           }
-  ?>
-
-
+     <p class ="title-menu"> <?php include("../controladores/usuario_menu_controller.php"); ?> </p>
 
 	</div>
       <div class="contenedor-logos">
@@ -113,7 +97,13 @@
         <p id="texto-contenedor-1" style = "font-size:20px; background-color: rgba(250, 250, 250  , 0.5);">
 
         <?php
-         //esto es una prueba
+
+
+
+           if (isset($_SESSION['token'])){
+
+             $token = new Token($_SESSION['token']);
+             $DatosUsuario = $token->ConsultarDatosUsuario();
 
              echo "Nombre: ".$DatosUsuario[3]. "<br>";
              echo "Apellido: ".$DatosUsuario[4]. "<br>";
@@ -121,6 +111,8 @@
              echo "Correo de registro: ".$DatosUsuario[1]. "<br>";
              echo "Nombre de Usuario: ".$DatosUsuario[2]. "<br>";
              echo "Fecha de Nacimiento: ".substr($DatosUsuario[5], 0, -14). "<br>";
+           }
+
          ?>
         </p>
       </div>

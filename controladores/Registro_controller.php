@@ -6,7 +6,7 @@ if (isset($_SESSION['username'])){ // pregunta si la sesión esta iniciada para 
 header("Location: $url");
 }
 include("../modelos/Usuario.php");
-include("../Alerta.php");
+include("../vistas/scripts/Alerta.php");
 
 
 if (isset($_POST["enviando"])) {
