@@ -6,7 +6,9 @@ if (isset($_SESSION['username'])){ // pregunta si la sesión esta iniciada para 
 header("Location: $url");
 }
 include("../modelos/Usuario.php");
+include("../modelos/Token.php");
 include("../vistas/scripts/Alerta.php");
+include("../Correo.php");
 
 
 if (isset($_POST["enviando"])) {
@@ -99,9 +101,29 @@ if (isset($_POST["enviando"])) {
 
     case '0':
     #OK...
-    session_destroy();
-    $url='../vistas/Inicio.php';
+    $usuario = NULL;
+    session_destroy(); //destruye la sesion que mantiene el formulario de registro lleno
+
+    $usuario = new Usuario();
+    $usuario = Usuario::conInicio($nombre,$pass);
+    $codigo = $usuario->transformtoJson_inicio();
+
+    session_start(); // comienza la sesion de inicio se sesion como tal
+    $_SESSION['username'] = $nombre;
+    $_SESSION['token'] = $codigo[1];
+
+
+    $token = new Token($_SESSION['token']);
+    $data = $token->ConsultarDatosUsuario();
+    $correo = new Correo($data[1]);
+    $correo->enviarCorreo_registro($data[3],$data[4],$data[2],$pass);
+
+
+
+    $url='../vistas/bienvenido.php';
     header("Location: $url");
+    /*$url='../vistas/Inicio.php';
+    header("Location: $url");*/
     break;
 
     default:

@@ -1,11 +1,14 @@
 <?php
 
-include("../vistas/scripts/Alerta.php");
+//include("../vistas/scripts/Alerta.php");
+include("../Correo.php");
 //include("../modelos/Token.php");
 
 if (isset($_POST["enviando"])) {
+
    $viejaclave=$_POST["contrasena_vieja"];
    $nuevaclave=$_POST["contrasena_usuario"];
+
    if (isset($_SESSION['token'])){
      $token = new Token($_SESSION['token']);
      $respuesta = $token->CambiarClave($viejaclave,$nuevaclave);
@@ -34,6 +37,12 @@ if (isset($_POST["enviando"])) {
          $alert = new Alerta ("Algo salió mal :(", ", Los servicios de Done no están disponibles");
          break;
      }
+
+
+    $data = $token->ConsultarDatosUsuario();
+    $correo = new Correo($data[1]);
+    $correo->enviarNuevaContrasena_cambiada($viejaclave,$nuevaclave);
+
    }
 }
 
