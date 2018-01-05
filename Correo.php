@@ -40,10 +40,10 @@ class Correo {
         //Server settings
         //$mail->SMTPDebug = 1;//Enable verbose debug output
         $mail->isSMTP();//Set mailer to use SMTP
-        $mail->Host = 'smtp.sendgrid.net';//Specify main and backup SMTP servers
+        $mail->Host = 'smtp.gmail.com';//Specify main and backup SMTP servers
         $mail->SMTPAuth = true;//Enable SMTP authentication
-        $mail->Username = 'apikey';//SMTP username
-        $mail->Password = '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';//SMTP password
+        $mail->Username = getenv('SMTP_USERNAME');
+        $mail->Password = getenv('SMTP_PASSWORD');
         $mail->SMTPSecure = 'tls';//Enable TLS encryption, `ssl` also accepted
         $mail->Port = 587;//TCP port to connect to
 
@@ -103,10 +103,10 @@ class Correo {
         //Server settings
         //$mail->SMTPDebug = 1;//Enable verbose debug output
         $mail->isSMTP();//Set mailer to use SMTP
-        $mail->Host = 'smtp.sendgrid.net';//Specify main and backup SMTP servers
+        $mail->Host = 'smtp.gmail.com';//Specify main and backup SMTP servers
         $mail->SMTPAuth = true;//Enable SMTP authentication
-        $mail->Username = 'apikey';//SMTP username
-        $mail->Password = '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';//SMTP password
+        $mail->Username = getenv('SMTP_USERNAME');
+        $mail->Password = getenv('SMTP_PASSWORD');
         $mail->SMTPSecure = 'tls';//Enable TLS encryption, `ssl` also accepted
         $mail->Port = 587;//TCP port to connect to
 
@@ -161,8 +161,8 @@ class Correo {
         $mail->isSMTP();//Set mailer to use SMTP
         $mail->Host = 'smtp.sendgrid.net';//Specify main and backup SMTP servers
         $mail->SMTPAuth = true;//Enable SMTP authentication
-        $mail->Username = 'apikey';//SMTP username
-        $mail->Password = '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';//SMTP password
+        $mail->Username = getenv('SMTP_USERNAME');
+        $mail->Password = getenv('SMTP_PASSWORD');
         $mail->SMTPSecure = 'tls';//Enable TLS encryption, `ssl` also accepted
         $mail->Port = 587;//TCP port to connect to
 
