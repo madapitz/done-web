@@ -13,11 +13,11 @@ if (isset($_SESSION['token'])){
 
           $titulo = $_POST['titulo_tarea'];
           $descripcion = $_POST['descripcion_tarea'];
+          $fecha = $_POST['fecha_tarea'];
+          $categoria = ucfirst($_POST['categoria_tarea']);
+          
 
-
-          $codigo = $token->PostTareas($titulo,$descripcion);
-          //echo $codigo;
-
+          $codigo = $token->PostTareas($titulo,$descripcion,$fecha,$categoria);
           switch ($codigo) {
 
             case '0':
