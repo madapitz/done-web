@@ -124,6 +124,24 @@
            <br>
 
            <tr>
+              <td id = "identificadorentrada"> Categorías </td>
+              <td>
+              <label for="categoria_tarea"></label>
+              <select id="categoria_tarea" name="categoria_tarea">
+              <option value="">Escoja una Categoría</option>
+            <?php
+             $token = new token($_SESSION['token']);
+             $categorias = $token->GetCategoria();
+            foreach($categorias as $cat){
+             ?>
+             <option value="<?php echo strtolower($cat); ?>"><?php echo $cat; ?></option>
+             <?php
+             }
+             ?>
+               </select>
+           </tr>
+
+           <tr>
            <td colspan="2" align="center"><input name="creando_tarea" type="submit" class="boton" value="Crear Tarea"/> <td>
            </tr>
 
@@ -136,7 +154,8 @@
 </div>
 
 
-<?php include("../controladores/Creartareas_controller.php"); ?>
+<?php
+include("../controladores/Creartareas_controller.php"); ?>
 
 
 
