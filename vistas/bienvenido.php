@@ -91,19 +91,52 @@
 <div id="body" class = "container">
 			<div id="texto">
 				 <p id="texto-contenedor-1">Lista actual de tareas</p>
+         <form method="post" name="elegir_categoria" action="bienvenido.php">
+           <tr>
+              <td id = "identificadorentrada"> Categorías </td>
+              <td>
+              <label for="categoria_tarea"></label>
+              <select id="categoria_tarea" name="categoria_tarea">
+              <option value="">Escoja una Categoría</option>
+            <?php
+             $token = new token($_SESSION['token']);
+             $categorias = $token->GetCategoria();
+            foreach($categorias as $cat){
+             ?>
+             <option value="<?php echo strtolower($cat); ?>"><?php echo $cat; ?></option>
+             <?php
+             }
+             ?>
+             <option value="Todas"> Todas </option>
+            </select>
+           </tr>
+            <tr>
+           <td colspan="2" align="center"><input name="eligiendo_categoria" type="submit" class="boton" value="Elegir"/> <td>
+           </tr>
+         </form>
          <p id="texto-contenedor-1" style = "font-size:20px; background-color:white;">
-
 
         <?php
 
          if (isset($_SESSION['token'])){
 
-          $token = new Token($_SESSION['token']);
+          //$token = new Token($_SESSION['token']);
           $DatosUsuario = $token->ConsultarDatosUsuario();
+          if (isset($_POST['eligiendo_categoria'])){
 
-         $datos = $token->ConsultarTareas();
+            $Categoria = ucfirst($_POST['categoria_tarea']);
+            echo $Categoria;
+            echo "<br>";
+            echo "<br>";
+            echo "<br>";
+          if ($Categoria=="Todas"){
+           $datos = $token->ConsultarTareas();
+          }
+          else{
+            $datos = $token->GetTareaCategoria($Categoria);
+          }
 
-         //print_r($datos[0]);
+          //print_r($datos[0]);
 
          if (sizeof($datos[0])==0){
             echo "- Aun no tiene tareas registradas :( "."<br>";
@@ -119,7 +152,7 @@
 
          }
         }
-
+      }
     //$token->EditarTarea("5a4c5cd1e6092500142f7d06","cambio");
 
 
