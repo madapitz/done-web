@@ -304,7 +304,43 @@ public function EliminarTarea($id){
     curl_close($ch);
     return $json;
 }
+public function CompletarTarea($id,$completada){
+  $data = array(
+         'completado' => $completada
+      );
 
+      $json = json_encode($data);
+      $url = 'https://intense-lake-39874.herokuapp.com/tareas/'.$id;
+
+      //el url del curl
+      $ch = curl_init($url);
+
+  $this->tokenid = substr($this->tokenid,0,-2);
+  $tokenid = $this->tokenid;
+  $st2 = "x-auth: ".$tokenid;
+
+    curl_setopt_array($ch, array(
+      CURLOPT_URL => $url,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'PATCH',
+      CURLOPT_POSTFIELDS => $json,
+      CURLOPT_HTTPHEADER => array(
+        'Content-Type: application/json',
+        $st2
+      )
+    ));
+  $response = curl_exec($ch);
+
+  //$respuesta = json_decode($response);
+
+  curl_close($ch);
+
+  return $response;
+}
 
 
 

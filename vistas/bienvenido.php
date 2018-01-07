@@ -43,8 +43,6 @@
         </a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="Creartareas.php">Crear tarea</a>
-          <a class="dropdown-item" href="#">Crear lista de tareas</a>
-          <a class="dropdown-item" href="#">Ver lista de tareas</a>
           <a class="dropdown-item" href="Perfil.php">Ver perfil</a>
           <a class="dropdown-item" href="../controladores/logout_controller.php">Cerrar Sesión</a>
         </div>
@@ -155,6 +153,11 @@
           <form method="post" action="bienvenido.php">
           <button name="borrando_tarea" type="submit" class="boton" value= <?php echo $datos[0][$i]->_id ?>/> Eliminar Tarea </button>
           <button name="modificando_tarea" type="submit" class="boton" value= <?php echo $datos[0][$i]->_id ?>/> Modificar Tarea </button>
+          <?php if ($datos[0][$i]->completado==false) {?>
+           <button name="completada_tarea" type="submit" class="boton" value= <?php echo $datos[0][$i]->_id ?>/> Completar Tarea </button>
+          <?php } else { ?>
+           <button name="descompletada_tarea" type="submit" class="boton" value= <?php echo $datos[0][$i]->_id ?>/> Descompletar Tarea </button>
+          <?php } ?>
           </form>
         </div> 
         </li>
@@ -189,4 +192,6 @@
 
 
 </body>
+
+
 </html>
