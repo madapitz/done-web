@@ -145,7 +145,24 @@
            } else{
          for ($i = 0; $i<sizeof($datos[0]); $i++){
 
-         ?><p id="texto-contenedor-2" style = "font-size:20px;" ><?php
+
+         ?>
+         <li class="nav-item dropdown" >
+          <a class="objeto nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          <i class="fa fa-bars" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu">
+          <form method="post" action="bienvenido.php">
+          <button name="borrando_tarea" type="submit" class="boton" value= <?php echo $datos[0][$i]->_id ?>/> Eliminar Tarea </button>
+          <button name="modificando_tarea" type="submit" class="boton" value= <?php echo $datos[0][$i]->_id ?>/> Modificar Tarea </button>
+          </form>
+        </div> 
+        </li>
+         <p id="texto-contenedor-2" style = "font-size:20px;" >
+        <!-- Menu desplegable -->
+      
+     
+         <?php
 
          echo "<br>";
          echo "* Tarea ".($i+1)."<br>";
@@ -155,10 +172,12 @@
             echo "Completado: no";
           }else{ echo "Completado: sí";}
          echo "<br><br>";
-
-       } ?> </p> <?php
+         ?>
+         <?php
+         }
         }
       }
+      include("../controladores/bienvenido_controller.php");
     //$token->EditarTarea("5a4c5cd1e6092500142f7d06","cambio");
    }
 ?>
