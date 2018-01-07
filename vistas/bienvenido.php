@@ -19,6 +19,7 @@
   <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="../views/styles/estiloPagTareas.css">
   <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+  <script src="scripts/overflow_marquee.js"></script>
   <script src="https://use.fontawesome.com/5643167d36.js"></script>
 
 
@@ -65,7 +66,7 @@
 			</div>
     </a>
 
-<p class ="title-menu"> <?php include("../controladores/usuario_menu_controller.php"); ?> </p>
+   <p class ="title-menu"> <?php include("../controladores/usuario_menu_controller.php"); ?> </p>
 
 	</div>
       <div class="contenedor-logos">
@@ -88,12 +89,14 @@
 
 
 
+
 <div id="body" class = "container">
 			<div id="texto">
 				 <p id="texto-contenedor-1">Lista actual de tareas</p>
          <form method="post" name="elegir_categoria" action="bienvenido.php">
+           &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
            <tr>
-              <td id = "identificadorentrada"> Categorías </td>
+              <td>Categorías</td>
               <td>
               <label for="categoria_tarea"></label>
               <select id="categoria_tarea" name="categoria_tarea">
@@ -114,10 +117,10 @@
            <td colspan="2" align="center"><input name="eligiendo_categoria" type="submit" class="boton" value="Elegir"/> <td>
            </tr>
          </form>
-         <p id="texto-contenedor-1" style = "font-size:20px; background-color:white;">
+
+ <p id ="texto-contenedor-1" style="background-color:white; font-size:20px;">
 
         <?php
-
          if (isset($_SESSION['token'])){
 
           //$token = new Token($_SESSION['token']);
@@ -128,37 +131,37 @@
             echo $Categoria;
             echo "<br>";
             echo "<br>";
-            echo "<br>";
           if ($Categoria=="Todas"){
            $datos = $token->ConsultarTareas();
           }
           else{
             $datos = $token->GetTareaCategoria($Categoria);
           }
-
-          //print_r($datos[0]);
+ ?></p><?php
 
          if (sizeof($datos[0])==0){
             echo "- Aun no tiene tareas registradas :( "."<br>";
             echo "Ve al menu y presiona crear tarea para agregar una tarea";
            } else{
          for ($i = 0; $i<sizeof($datos[0]); $i++){
-         echo " * Tarea ".($i+1)."<br>";
+
+         ?><p id="texto-contenedor-2" style = "font-size:20px;" ><?php
+
+         echo "<br>";
+         echo "* Tarea ".($i+1)."<br>";
          echo "Titulo: ". $datos[0][$i]->titulo. "<br>";
          echo "Descripcion: ". $datos[0][$i]->descripcion. "<br>";
-         echo "id: ". $datos[0][$i]->_id. "<br>";
-         echo "completado: ". $datos[0][$i]->completado."<br>";
+          if ($datos[0][$i]->completado==false){
+            echo "Completado: no";
+          }else{ echo "Completado: sí";}
          echo "<br><br>";
 
-         }
+       } ?> </p> <?php
         }
       }
     //$token->EditarTarea("5a4c5cd1e6092500142f7d06","cambio");
-
-
-      }
-
-         ?>
+   }
+?>
 
          </p>
       </div>

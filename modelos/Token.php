@@ -151,6 +151,42 @@ public function CambiarClave($vieja,$nueva){
  }
 
 
+public function CambiarClave_recuperada($email){
+
+ $data = array(
+   'email' => $email
+ );
+
+ $json = json_encode($data);
+
+ $url = 'https://intense-lake-39874.herokuapp.com/usuarios/pass';
+
+ //el url del curl
+ $ch = curl_init();
+
+ curl_setopt_array($ch, array(
+   CURLOPT_URL => $url,
+   CURLOPT_RETURNTRANSFER => true,
+   CURLOPT_ENCODING => "",
+   CURLOPT_MAXREDIRS => 10,
+   CURLOPT_TIMEOUT => 30,
+   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+   CURLOPT_CUSTOMREQUEST => 'PATCH',
+   CURLOPT_POSTFIELDS => $json,
+   CURLOPT_HTTPHEADER => array(
+     'Content-Type: application/json'
+   )
+ ));
+
+ $response = curl_exec($ch);
+ $respuesta = json_decode($response);
+
+ $http_info = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+ curl_close($ch);
+ return $response;
+}
+
 
 
 
@@ -236,7 +272,7 @@ echo $response;
      $datos = array($co);
      curl_close($ch);
      $categorias = array();
-     for ($i=0; $i < sizeof($datos[0]); $i++) { 
+     for ($i=0; $i < sizeof($datos[0]); $i++) {
         $categorias[$i] = $datos[0][$i]->categoria;
      }
      return $categorias;
@@ -257,6 +293,8 @@ echo $response;
   }
 
 
+
+
+
 }
 ?>
-
