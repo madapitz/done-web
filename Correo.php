@@ -81,12 +81,16 @@ class Correo {
 
         $mail->send();
 
+
+        $alert = new Alerta("Su contraseña fue cambiada", ", Revise su correo");
+        $alert->mostrar();
+
     } catch (Exception $e) { // una excepcion (cualquier error que se pueda presentar en el php mailer, como correo no existe o falla de conexión al cliente web)
 
       $alert = new Alerta("Algo salió mal :(", ", Revise su correo y su conexión a internet");
       $alert->mostrar();
-      /*  echo 'Message could not be sent.';
-        echo 'Mailer Error: ' . $mail->ErrorInfo;*/
+      /*  echo 'Message could not be sent.';*/
+        echo 'Mailer Error: ' . $mail->ErrorInfo;
     }
   } //end
 
@@ -145,6 +149,8 @@ class Correo {
                           <br>No responder a este correo</br>';
 
         $mail->send();
+
+
   }
 
 

@@ -32,19 +32,14 @@ if (isset($_POST["enviando"])) {
        #ok
        $alert = new Alerta ("Correcto,", "Su contraseña ha sido cambiada correctamente");
        $alert->mostrar();
-         break;
-       default:
+       $data = $token->ConsultarDatosUsuario();
+       $correo = new Correo($data[1]);
+       $correo->enviarNuevaContrasena_cambiada($viejaclave,$nuevaclave);
+      break;
+      default:
          $alert = new Alerta ("Algo salió mal :(", ", Los servicios de Done no están disponibles");
-         break;
+      break;
      }
-
-
-    $data = $token->ConsultarDatosUsuario();
-    $correo = new Correo($data[1]);
-    $correo->enviarNuevaContrasena_cambiada($viejaclave,$nuevaclave);
-
    }
 }
-
-
 ?>

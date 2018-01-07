@@ -57,16 +57,14 @@
       <td>&nbsp;</td>
     </tr>
   <tr>
-  <td colspan="2" align="center"><input name="Enviarmail" type="submit" value="Enviar email"/> <td>
+  <td colspan="2" align="center"><input name="enviando_mail" type="submit" class="boton" value="Enviar email"/> <td>
   </tr>
 </table>
 </form>
 </section>
 
 
-
-
-<? include("../controladores/recuperarcontrasena_controller.php")?>
+<?php include("../controladores/recuperarcontrasena_controller.php")?>
 
 
 <section class="container">
