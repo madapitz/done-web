@@ -60,7 +60,7 @@ if (isset($_SESSION['token'])){
               break;
 
 
-           case '25':
+           case '37':
               #lIMITE DE CARACTERES
               echo "<br><br><br><br><br><br><br><br>";
               $alert = new Alerta("No se pudo enviar tu tarea,","La descripción contiene codigo script no permitido");
