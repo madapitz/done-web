@@ -138,33 +138,38 @@
  ?></p><?php
 
          if (sizeof($datos[0])==0){
-            echo "- Aun no tiene tareas registradas :( "."<br>";
-            echo "Ve al menu y presiona crear tarea para agregar una tarea";
+            echo "<p id ='texto-contenedor-1' style='background-color:white; font-size:16px;'>- Aun no tiene tareas registradas de esta categoría "."<br>";
+            echo "Ve al menu y presiona crear tarea para agregar una tarea </p>";
            } else{
          for ($i = 0; $i<sizeof($datos[0]); $i++){
 
 
          ?>
-         <li class="nav-item dropdown" >
+
+
+
+
+         <li class="nav-item dropdown" style ="margin-left:185px;">
           <a class="objeto nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
           <i class="fa fa-bars" aria-hidden="true"></i>
           </a>
           <div class="dropdown-menu">
           <form method="post" action="bienvenido.php">
-          <button name="borrando_tarea" type="submit" class="boton" value= <?php echo $datos[0][$i]->_id ?>/> Eliminar Tarea </button>
-          <button name="modificando_tarea" type="submit" class="boton" value= <?php echo $datos[0][$i]->_id ?>/> Modificar Tarea </button>
+          <button name="borrando_tarea" type="submit" class="boton" value= <?php echo $datos[0][$i]->_id ?> style = "color:#383838;"/> Eliminar Tarea </button>
+          <button name="modificando_tarea" type="submit" class="boton" value= <?php echo $datos[0][$i]->_id ?> style = "color:#383838;" /> Modificar Tarea </button>
           <?php if ($datos[0][$i]->completado==false) {?>
-           <button name="completada_tarea" type="submit" class="boton" value= <?php echo $datos[0][$i]->_id ?>/> Completar Tarea </button>
+           <button name="completada_tarea" type="submit" class="boton" value= <?php echo $datos[0][$i]->_id ?> style = "color:#383838;" /> Completar Tarea </button>
           <?php } else { ?>
-           <button name="descompletada_tarea" type="submit" class="boton" value= <?php echo $datos[0][$i]->_id ?>/> Descompletar Tarea </button>
+           <button name="descompletada_tarea" type="submit" class="boton" value= <?php echo $datos[0][$i]->_id ?> style = "color:#383838;" /> Descompletar Tarea </button>
           <?php } ?>
           </form>
-        </div> 
+        </div>
         </li>
+
          <p id="texto-contenedor-2" style = "font-size:20px;" >
         <!-- Menu desplegable -->
-      
-     
+
+
          <?php
 
          echo "<br>";
