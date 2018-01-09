@@ -99,13 +99,6 @@
     <!--comienza la tabla-->
     <table align ="center">
          <form method="post" name="editar_tarea_formulario" action="EditarTarea.php?id=<?php echo $_GET['id']; ?>">
-           <tr>
-             <td id="identificadorentrada">ID tarea</td>
-             <td>
-               <label for="id_tarea"></label>
-               <input type="text" name="id_tarea" placeholder="Introduzca el id de su tarea" value="<?php echo $_GET['id']; ?>" required disabled>
-             </td>
-           </tr>
            <br>
            <tr>
              <td id="identificadorentrada">Titulo</td>
@@ -131,24 +124,6 @@
              </td>
            </tr>
            <br>
-           <tr>
-              <td id = "identificadorentrada"> Categorías </td>
-              <td>
-              <label for="categoria_tarea"></label>
-              <select id="categoria_tarea" name="categoria_tarea">
-              <option value="">Escoja una Categoría</option>
-
-            <?php
-             $token = new token($_SESSION['token']);
-             $categorias = $token->GetCategoria();
-            foreach($categorias as $cat){
-             ?>
-             <option value="<?php echo strtolower($cat); ?>"><?php echo $cat; ?></option>
-             <?php
-             }
-             ?>
-           </select>
-           </tr>
 
            <tr>
            <td colspan="2" align="center"><input name="editando_tarea" type="submit" class="boton" value="Guardar cambios"/> <td>
