@@ -191,12 +191,15 @@ public function CambiarClave_recuperada($email){
 
 
 //////////////////////////////////////////
-public function EditarTarea($id,$cambio){
+public function EditarTarea($id,$titulo,$descripcion,$fecha,$categoria){
 
 
-      $data = array(
-         'titulo' => $cambio
-      );
+  $data = array(
+    'titulo' => $titulo,
+    'descripcion' => $descripcion,
+    'fechaParaSerCompletada' => $fecha,
+    'categoria' => $categoria
+  );
 
       $json = json_encode($data);
       $url = 'https://intense-lake-39874.herokuapp.com/tareas/'.$id;
@@ -223,15 +226,25 @@ public function EditarTarea($id,$cambio){
       )
     ));
   $response = curl_exec($ch);
-
-echo $response;
-
-  $respuesta = json_decode($response);
-
-  print_r($respuesta);
-
-  curl_close($ch);
+   curl_close($ch);
 }
+
+
+public function GetTareaID($id){
+   $url = 'https://intense-lake-39874.herokuapp.com/tareas/id/'.$id;
+    //Iniciar cURL
+    $ch = curl_init($url);
+    $curl_headers = array();
+    $curl_headers[] = 'X-AUTH: '.$this->tokenid;
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $curl_headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $json = curl_exec($ch);
+    $co = json_decode($json);
+    curl_close($ch);
+    $datos = array($co->titulo,$co->descripcion,$co->fechaParaSerCompletada);
+    return $datos;
+}
+
 
  public function PostCategoria($nombre){
     $data = array(
