@@ -1,3 +1,7 @@
+<?php
+ob_start(); // buffer
+?>
+
 <!DOCTYPE html>
 
 
@@ -156,8 +160,9 @@
           <div class="dropdown-menu">
           <form method="post" action="bienvenido.php">
           <button name="borrando_tarea" type="submit" class="boton" value= <?php echo $datos[0][$i]->_id ?> style = "color:#383838;"/> Eliminar Tarea </button>
-          <button name="modificando_tarea" type="submit" class="boton" value= <?php echo $datos[0][$i]->_id ?> style = "color:#383838;" /> Modificar Tarea </button>
           <?php if ($datos[0][$i]->completado==false) {?>
+          <button name="modificando_tarea" type="submit" class="boton" value= <?php echo $datos[0][$i]->_id ?> style = "color:#383838;" /> Modificar Tarea </button>
+        <?php } if ($datos[0][$i]->completado==false) {?>
            <button name="completada_tarea" type="submit" class="boton" value= <?php echo $datos[0][$i]->_id ?> style = "color:#383838;" /> Completar Tarea </button>
           <?php } else { ?>
            <button name="descompletada_tarea" type="submit" class="boton" value= <?php echo $datos[0][$i]->_id ?> style = "color:#383838;" /> Descompletar Tarea </button>
@@ -176,6 +181,9 @@
          echo "* Tarea ".($i+1)."<br>";
          echo "Titulo: ". $datos[0][$i]->titulo. "<br>";
          echo "Descripcion: ". $datos[0][$i]->descripcion. "<br>";
+         echo "Fecha :". substr($datos[0][$i]->fechaParaSerCompletada, 0, -14). "<br>";
+
+
           if ($datos[0][$i]->completado==false){
             echo "Completado: no";
           }else{ echo "Completado: sí";}
@@ -186,7 +194,6 @@
         }
       }
       include("../controladores/bienvenido_controller.php");
-    //$token->EditarTarea("5a4c5cd1e6092500142f7d06","cambio");
    }
 ?>
 
@@ -200,3 +207,7 @@
 
 
 </html>
+
+<?php
+ob_end_flush(); //buffer
+?>
