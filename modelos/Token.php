@@ -191,14 +191,13 @@ public function CambiarClave_recuperada($email){
 
 
 //////////////////////////////////////////
-public function EditarTarea($id,$titulo,$descripcion,$fecha,$categoria){
+public function EditarTarea($id,$titulo,$descripcion,$fecha){
 
 
   $data = array(
     'titulo' => $titulo,
     'descripcion' => $descripcion,
-    'fechaParaSerCompletada' => $fecha,
-    'categoria' => $categoria
+    'fechaParaSerCompletada' => $fecha
   );
 
       $json = json_encode($data);
@@ -226,7 +225,16 @@ public function EditarTarea($id,$titulo,$descripcion,$fecha,$categoria){
       )
     ));
   $response = curl_exec($ch);
-   curl_close($ch);
+  $respuesta = json_decode($response);
+  $http_info = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+  curl_close($ch);
+  if ($http_info==200){
+    return $http_info;
+  }
+  else
+  {
+  return $respuesta->codigo;
+  }
 }
 
 
